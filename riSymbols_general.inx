@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <_name>General</_name>
+    <id>fsmMLK.riSymbols.general</id>
+    <dependency type="executable" location="extensions">riSymbols.py</dependency>
+    <dependency type="executable" location="extensions">inkscapeMadeEasy_Base.py</dependency>
+    <dependency type="executable" location="extensions">inkscapeMadeEasy_Draw.py</dependency>
+    <dependency type="executable" location="extensions">inkex.py</dependency>
+    <param name="tab" type="notebook">
+        <page name="pump" appearance="minimal" _gui-text="Pumps">
+            <param name="pump" type="optiongroup" appearance="minimal" _gui-text="Type:">
+                <_option value="generic">Default</_option>
+                <_option value="piston">Piston</_option>
+                <_option value="membrane">Membrane</_option>
+                <_option value="centrifugal">Centrifugal</_option>
+            </param>
+            <param name="pumpLabel" type="string" _gui-text="Label">Pump</param>
+            <param name="pumpRot" type="optiongroup" appearance="minimal" _gui-text="Label Orientation (deg):">
+                <_option value="0">0</_option>
+                <_option value="90">90</_option>
+                <_option value="-90">-90</_option>
+            </param>
+            <param name="pumpDirection" type="optiongroup" appearance="minimal" _gui-text="Flow Direction:">
+                <_option value="left">left</_option>
+                <_option value="right">right</_option>
+            </param>
+        </page>
+        <page name="compressor" appearance="minimal" _gui-text="Compressors">
+            <param name="compressor" type="optiongroup" appearance="minimal" _gui-text="Type:">
+                <_option value="generic">Default</_option>
+                <_option value="piston">Piston</_option>
+            </param>
+            <param name="compressorLabel" type="string" _gui-text="Label">Compressor</param>
+            <param name="compressorRot" type="optiongroup" appearance="minimal" _gui-text="Label Orientation (deg):">
+                <_option value="0">0</_option>
+                <_option value="90">90</_option>
+                <_option value="-90">-90</_option>
+            </param>
+            <param name="compressorDirection" type="optiongroup" appearance="minimal" _gui-text="Flow Direction:">
+                <_option value="left">left</_option>
+                <_option value="right">right</_option>
+            </param>
+        </page>
+        <page name="Colors" appearance="minimal" _gui-text="Colors">
+            <param name="desc1" type="description" appearance="header">Current annotation color</param>
+            <param name="currColor" type="optiongroup" appearance="minimal" _gui-text="Color:">
+                <_option value="#FF0000">default current color</_option>
+                <_option value="picker">use color picker</_option>
+            </param>
+            <param name="colorPickerCurrent" type="color"/>
+        </page>
+        <page name="Help" _gui-text="Help">
+            <_param name="instructions" type="description" xml:space="preserve">
+For detailed help, see
+https://github.com/fwitte/inkscapeRISymbols
+
+
+Useful LaTeX commands
+\phase{} : for phasor angle symbol (steinmetz package needed)
+
+siunitx package commands available, Ex:
+\ohm,\farad,\henry,\ampere,\volt,\degree
+
+Custom predefined functions (LaTeX only):
+\phasorName{V} : Inserts phasor variable with a hat
+\impedance{Z} :
+\complexPol{magnitude}{theta_in_radians}
+\complexPolDeg{magnitude}{theta_in_deg}
+\Vpp, \App : peak-to-peak V and A units
+\Vrms,\Arms : rms V and A units
+
+
+            </_param>
+        </page>
+    </param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="R+I symbols"/>
+        </effects-menu>
+    </effect>
+    <script>
+        <command reldir="extensions" interpreter="python">riSymbols.py</command>
+    </script>
+</inkscape-extension>
+
