@@ -5,8 +5,9 @@ import os
 
 import inkscapeMadeEasy_Base as inkBase
 import inkscapeMadeEasy_Draw as inkDraw
-from drawRIComponents import pump
-from drawRIComponents import compressor
+from drawRIComponents import component
+from drawRICompressors import compressor
+from drawRIPumps import pump
 
 # some symbol definition
 
@@ -74,14 +75,16 @@ class RISymbols(pump, compressor):
         self.fontSizeSmall = 4
 
         # offset between symbol and text
-        self.textOffset = self.fontSize / 1.5
+        self.textOffset = self.fontSize
         # offset between symbol and text
         self.textOffsetSmall = self.fontSizeSmall / 2
-        self.textStyle = inkDraw.textStyle.setSimpleBlack(
-            self.fontSize, justification='center'
+        self.textStyle = inkDraw.textStyle.set(
+            fontSize=self.fontSize, justification='center',
+            fontFamily='Carlito'
         )
-        self.textStyleSmall = inkDraw.textStyle.setSimpleBlack(
-            self.fontSizeSmall, justification='center'
+        self.textStyleSmall = inkDraw.textStyle.set(
+            fontSize=self.fontSizeSmall, justification='center',
+            fontFamily='Carlito'
         )
 
         # sets the position to the viewport center, round to next 10.
@@ -96,16 +99,18 @@ class RISymbols(pump, compressor):
         so.pumpRot = float(so.pumpRot)
         so.compressorRot = float(so.compressorRot)
 
+        self.setDimensions()
+
         if so.tab == 'pump':
             self.drawPump(
-                root_layer, position, value=so.pumpLabel,
+                root_layer, position, label=so.pumpLabel,
                 direction=so.pumpDirection, angleDeg=so.pumpRot,
                 pumpType=so.pump
             )
 
         elif so.tab == 'compressor':
             self.drawCompressor(
-                root_layer, position, value=so.compressorLabel,
+                root_layer, position, label=so.compressorLabel,
                 direction=so.compressorDirection, angleDeg=so.compressorRot,
                 compressorType=so.compressor
             )
