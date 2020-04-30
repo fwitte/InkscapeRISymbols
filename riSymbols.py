@@ -8,6 +8,7 @@ import inkscapeMadeEasy_Draw as inkDraw
 from drawRIComponents import component
 from drawRICompressors import compressor
 from drawRIPumps import pump
+from drawRIArmatures import armature
 
 # some symbol definition
 
@@ -39,7 +40,7 @@ def latexUnitMultiple(valueString):
 
 
 # ---------------------------------------------
-class RISymbols(pump, compressor):
+class RISymbols(pump, compressor, armature):
     def __init__(self):
         inkBase.inkscapeMadeEasy.__init__(self)
 
@@ -54,6 +55,21 @@ class RISymbols(pump, compressor):
         self.OptionParser.add_option("--compressorLabel", action="store", type="string", dest="compressorLabel", default='Compressor')
         self.OptionParser.add_option("--compressorRot", action="store", type="string", dest="compressorRot", default='0')
         self.OptionParser.add_option("--compressorDirection", action="store", type="string", dest="compressorDirection", default='right')
+
+        self.OptionParser.add_option("--pipe", action="store", type="string", dest="pipe", default='Default')
+        self.OptionParser.add_option("--pipeLabel", action="store", type="string", dest="pipeLabel", default='Pipe')
+        self.OptionParser.add_option("--pipeRot", action="store", type="string", dest="pipeRot", default='0')
+        self.OptionParser.add_option("--pipeDirection", action="store", type="string", dest="pipeDirection", default='right')
+
+        self.OptionParser.add_option("--armature", action="store", type="string", dest="armature", default='Default')
+        self.OptionParser.add_option("--armatureLabel", action="store", type="string", dest="armatureLabel", default='Armature')
+        self.OptionParser.add_option("--armatureRot", action="store", type="string", dest="armatureRot", default='0')
+        self.OptionParser.add_option("--armatureDirection", action="store", type="string", dest="armatureDirection", default='right')
+
+        self.OptionParser.add_option("--node", action="store", type="string", dest="node", default='Default')
+        self.OptionParser.add_option("--nodeLabel", action="store", type="string", dest="nodeLabel", default='Node')
+        self.OptionParser.add_option("--nodeRot", action="store", type="string", dest="nodeRot", default='0')
+        self.OptionParser.add_option("--nodeDirection", action="store", type="string", dest="nodeDirection", default='right')
 
         self.OptionParser.add_option("--currColor", action="store", type="string", dest="currColor", default='#FF0000')
         self.OptionParser.add_option("--colorPickerCurrent", action="store", type="string", dest="colorPickerCurrent", default='0')
@@ -98,6 +114,9 @@ class RISymbols(pump, compressor):
 
         so.pumpRot = float(so.pumpRot)
         so.compressorRot = float(so.compressorRot)
+        so.pipeRot = float(so.pipeRot)
+        so.armatureRot = float(so.armatureRot)
+        so.nodeRot = float(so.nodeRot)
 
         self.setDimensions()
 
@@ -114,6 +133,76 @@ class RISymbols(pump, compressor):
                 direction=so.compressorDirection, angleDeg=so.compressorRot,
                 compressorType=so.compressor
             )
+
+        elif so.tab == 'armatures':
+            if so.armature in ['valve', 'ball valve', 'three way valve']:
+                self.drawValve(
+                    root_layer, position, label=so.armatureLabel,
+                    direction=so.armatureDirection, angleDeg=so.armatureRot,
+                    armatureType=so.armature
+                )
+
+            elif so.armature == 'check valve':
+                self.drawCheckValve(
+                    root_layer, position, label=so.armatureLabel,
+                    direction=so.armatureDirection, angleDeg=so.armatureRot,
+                    armatureType=so.armature
+                )
+
+            elif so.armature == 'expansion valve':
+                self.drawExpansionValve(
+                    root_layer, position, label=so.armatureLabel,
+                    direction=so.armatureDirection, angleDeg=so.armatureRot,
+                    armatureType=so.armature
+                )
+
+        elif so.tab == 'piping':
+            if so.armature == 'injection':
+                self.drawInjection(
+                    root_layer, position, label=so.armatureLabel,
+                    direction=so.armatureDirection, angleDeg=so.armatureRot,
+                    armatureType=so.armature
+                )
+
+            elif so.armature == 'droplet separator':
+                self.drawDropletSeparator(
+                    root_layer, position, label=so.armatureLabel,
+                    direction=so.armatureDirection, angleDeg=so.armatureRot,
+                    armatureType=so.armature
+                )
+
+            elif so.armature == 'node':
+                self.drawNode(
+                    root_layer, position, label=so.armatureLabel,
+                    direction=so.armatureDirection, angleDeg=so.armatureRot,
+                    armatureType=so.armature
+                )
+
+            elif so.armature == 'drum':
+                self.drawDrum(
+                    root_layer, position, label=so.armatureLabel,
+                    direction=so.armatureDirection, angleDeg=so.armatureRot,
+                    armatureType=so.armature
+                )
+
+            elif so.armature == 'injection':
+                self.drawInjection(
+                    root_layer, position, label=so.armatureLabel,
+                    direction=so.armatureDirection, angleDeg=so.armatureRot,
+                    armatureType=so.armature
+                )
+
+        elif so.tab == 'piping':
+            if so.pipe == 'hose':
+                self.drawHose(
+                    root_layer, position, label=so.pipeLabel,
+                    direction=so.pipeDirection, angleDeg=so.pipeRot
+                )
+            elif so.pipe == 'generic':
+                self.drawPipe(
+                    root_layer, position, label=so.pipeLabel,
+                    direction=so.pipeDirection, angleDeg=so.pipeRot
+                )
 
 
 if __name__ == '__main__':
