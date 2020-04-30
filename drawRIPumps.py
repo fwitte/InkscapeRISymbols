@@ -5,6 +5,8 @@ import inkscapeMadeEasy_Draw as inkDraw
 
 from drawRIComponents import component
 
+import numpy as np
+
 
 class pump(component):
     # ---------------------------------------------
