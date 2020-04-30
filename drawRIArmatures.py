@@ -34,23 +34,15 @@ class armature(component):
 
         inkDraw.line.relCoords(
             elem, [[self.componentExtent, -self.componentExtent / 2]],
-<<<<<<< HEAD
-            [position[0] + self.connectorLength, position[1] + self.componentExtent / 4],
-=======
             [position[0] + self.connectorLength,
              position[1] + self.componentExtent / 4],
->>>>>>> feature/scaling_factor
             lineStyle=self.lineStyle
         )
 
         inkDraw.line.relCoords(
             elem, [[self.componentExtent, self.componentExtent / 2]],
-<<<<<<< HEAD
-            [position[0] + self.connectorLength, position[1] - self.componentExtent / 4],
-=======
             [position[0] + self.connectorLength,
              position[1] - self.componentExtent / 4],
->>>>>>> feature/scaling_factor
             lineStyle=self.lineStyle
         )
 
