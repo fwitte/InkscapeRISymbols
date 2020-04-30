@@ -50,7 +50,7 @@
                 <_option value="check valve">Check Valve</_option>
                 <_option value="expansion valve">Expansion Valve</_option>
             </param>
-            <param name="armatureLabel" type="string" _gui-text="Label">Compressor</param>
+            <param name="armatureLabel" type="string" _gui-text="Label">valve</param>
             <param name="armatureRot" type="optiongroup" appearance="minimal" _gui-text="Label Orientation (deg):">
                 <_option value="0">0</_option>
                 <_option value="90">90</_option>
