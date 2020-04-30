@@ -14,6 +14,7 @@
                 <_option value="membrane">Membrane</_option>
                 <_option value="centrifugal">Centrifugal</_option>
             </param>
+            <param name="pumpScale" type="int" min="1" max="10" _gui-text="Scaling factor">1</param>
             <param name="pumpLabel" type="string" _gui-text="Label">Pump</param>
             <param name="pumpRot" type="optiongroup" appearance="minimal" _gui-text="Label Orientation (deg):">
                 <_option value="0">0</_option>
@@ -30,6 +31,7 @@
                 <_option value="generic">Default</_option>
                 <_option value="piston">Piston</_option>
             </param>
+            <param name="compressorScale" type="int" min="1" max="10" _gui-text="Scaling factor">1</param>
             <param name="compressorLabel" type="string" _gui-text="Label">Compressor</param>
             <param name="compressorRot" type="optiongroup" appearance="minimal" _gui-text="Label Orientation (deg):">
                 <_option value="0">0</_option>
@@ -44,13 +46,14 @@
         <page name="armatures" appearance="minimal" _gui-text="Armatures">
             <param name="armature" type="optiongroup" appearance="minimal" _gui-text="Type:">
                 <_option value="valve">Valve</_option>
+                <_option value="expansion valve">Expansion Valve</_option>
                 <_option value="three way valve">Three Way Valve</_option>
                 <_option value="ball valve">Ball Valve</_option>
                 <_option value="three way ball valve">Three Way Ball Valve</_option>
                 <_option value="check valve">Check Valve</_option>
-                <_option value="expansion valve">Expansion Valve</_option>
             </param>
-            <param name="armatureLabel" type="string" _gui-text="Label">valve</param>
+            <param name="armatureScale" type="int" min="1" max="10" _gui-text="Scaling factor">1</param>
+            <param name="armatureLabel" type="string" _gui-text="Label">Valve</param>
             <param name="armatureRot" type="optiongroup" appearance="minimal" _gui-text="Label Orientation (deg):">
                 <_option value="0">0</_option>
                 <_option value="90">90</_option>
