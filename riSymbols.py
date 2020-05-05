@@ -50,26 +50,31 @@ class RISymbols(pump, compressor, armature):
         self.OptionParser.add_option("--pumpLabel", action="store", type="string", dest="pumpLabel", default='Pump')
         self.OptionParser.add_option("--pumpRot", action="store", type="string", dest="pumpRot", default='0')
         self.OptionParser.add_option("--pumpDirection", action="store", type="string", dest="pumpDirection", default='right')
+        self.OptionParser.add_option("--pumpScale", action="store", type="int", dest="pumpScale", default='1')
 
         self.OptionParser.add_option("--compressor", action="store", type="string", dest="compressor", default='Default')
         self.OptionParser.add_option("--compressorLabel", action="store", type="string", dest="compressorLabel", default='Compressor')
         self.OptionParser.add_option("--compressorRot", action="store", type="string", dest="compressorRot", default='0')
         self.OptionParser.add_option("--compressorDirection", action="store", type="string", dest="compressorDirection", default='right')
+        self.OptionParser.add_option("--compressorScale", action="store", type="int", dest="compressorScale", default='1')
 
         self.OptionParser.add_option("--pipe", action="store", type="string", dest="pipe", default='Default')
         self.OptionParser.add_option("--pipeLabel", action="store", type="string", dest="pipeLabel", default='Pipe')
         self.OptionParser.add_option("--pipeRot", action="store", type="string", dest="pipeRot", default='0')
         self.OptionParser.add_option("--pipeDirection", action="store", type="string", dest="pipeDirection", default='right')
+        self.OptionParser.add_option("--pipeScale", action="store", type="int", dest="pipeScale", default='1')
 
         self.OptionParser.add_option("--armature", action="store", type="string", dest="armature", default='Default')
         self.OptionParser.add_option("--armatureLabel", action="store", type="string", dest="armatureLabel", default='Armature')
         self.OptionParser.add_option("--armatureRot", action="store", type="string", dest="armatureRot", default='0')
         self.OptionParser.add_option("--armatureDirection", action="store", type="string", dest="armatureDirection", default='right')
+        self.OptionParser.add_option("--armatureScale", action="store", type="int", dest="armatureScale", default='1')
 
         self.OptionParser.add_option("--node", action="store", type="string", dest="node", default='Default')
         self.OptionParser.add_option("--nodeLabel", action="store", type="string", dest="nodeLabel", default='Node')
         self.OptionParser.add_option("--nodeRot", action="store", type="string", dest="nodeRot", default='0')
         self.OptionParser.add_option("--nodeDirection", action="store", type="string", dest="nodeDirection", default='right')
+        self.OptionParser.add_option("--nodeScale", action="store", type="int", dest="nodeScale", default='1')
 
         self.OptionParser.add_option("--currColor", action="store", type="string", dest="currColor", default='#FF0000')
         self.OptionParser.add_option("--colorPickerCurrent", action="store", type="string", dest="colorPickerCurrent", default='0')
@@ -118,9 +123,8 @@ class RISymbols(pump, compressor, armature):
         so.armatureRot = float(so.armatureRot)
         so.nodeRot = float(so.nodeRot)
 
-        self.setDimensions()
-
         if so.tab == 'pump':
+            self.setDimensions(scale=so.pumpScale)
             self.drawPump(
                 root_layer, position, label=so.pumpLabel,
                 direction=so.pumpDirection, angleDeg=so.pumpRot,
@@ -128,6 +132,7 @@ class RISymbols(pump, compressor, armature):
             )
 
         elif so.tab == 'compressor':
+            self.setDimensions(scale=so.compressorScale)
             self.drawCompressor(
                 root_layer, position, label=so.compressorLabel,
                 direction=so.compressorDirection, angleDeg=so.compressorRot,
@@ -135,6 +140,7 @@ class RISymbols(pump, compressor, armature):
             )
 
         elif so.tab == 'armatures':
+            self.setDimensions(scale=so.armatureScale)
             if so.armature in ['valve', 'ball valve', 'three way valve']:
                 self.drawValve(
                     root_layer, position, label=so.armatureLabel,
@@ -152,11 +158,11 @@ class RISymbols(pump, compressor, armature):
             elif so.armature == 'expansion valve':
                 self.drawExpansionValve(
                     root_layer, position, label=so.armatureLabel,
-                    direction=so.armatureDirection, angleDeg=so.armatureRot,
-                    armatureType=so.armature
+                    direction=so.armatureDirection, angleDeg=so.armatureRot
                 )
 
-        elif so.tab == 'piping':
+        elif so.tab == 'nodes':
+            self.setDimensions(scale=so.nodeScale)
             if so.armature == 'injection':
                 self.drawInjection(
                     root_layer, position, label=so.armatureLabel,
@@ -193,6 +199,7 @@ class RISymbols(pump, compressor, armature):
                 )
 
         elif so.tab == 'piping':
+            self.setDimensions(scale=so.pipeScale)
             if so.pipe == 'hose':
                 self.drawHose(
                     root_layer, position, label=so.pipeLabel,
