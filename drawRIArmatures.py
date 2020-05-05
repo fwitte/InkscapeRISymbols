@@ -83,6 +83,13 @@ class armature(component):
                 lineStyle=self.lineStyle
             )
 
+            inkDraw.line.relCoords(
+                elem, [[0, self.componentExtent / 2]],
+                [position[0] + self.connectorLength + self.componentExtent / 2,
+                 position[1] + self.componentExtent / 2],
+                lineStyle=self.lineStyle
+            )
+
         if armatureType == 'ball valve':
             inkDraw.circle.centerRadius(
                 elem, [self.connectorLength + self.componentExtent / 2, 0],
@@ -123,6 +130,13 @@ class armature(component):
                         - self.componentExtent / 2]],
                 [position[0] + self.connectorLength + self.componentExtent
                  / 4 * 3,
+                 position[1] + self.componentExtent / 2],
+                lineStyle=self.lineStyle
+            )
+
+            inkDraw.line.relCoords(
+                elem, [[0, self.componentExtent / 2]],
+                [position[0] + self.connectorLength + self.componentExtent / 2,
                  position[1] + self.componentExtent / 2],
                 lineStyle=self.lineStyle
             )
