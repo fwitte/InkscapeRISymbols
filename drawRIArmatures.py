@@ -133,6 +133,14 @@ class armature(component):
                 lineStyle=inkDraw.lineStyle.set(fillColor='#000000')
             )
 
+        if armatureType == 'gate valve':
+            inkDraw.line.relCoords(
+                elem, [[0, - self.componentExtent / 2]],
+                [position[0] + self.connectorLength + self.componentExtent / 2,
+                 position[1] + self.componentExtent / 4],
+                lineStyle=self.lineStyle
+            )
+
         if angleDeg != 0:
             self.rotateElement(group, position, angleDeg)
 

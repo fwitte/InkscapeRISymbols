@@ -51,6 +51,7 @@
                 <_option value="ball valve">Ball Valve</_option>
                 <_option value="three way ball valve">Three Way Ball Valve</_option>
                 <_option value="check valve">Check Valve</_option>
+                <_option value="gate valve">Gate Valve</_option>
             </param>
             <param name="armatureScale" type="int" min="1" max="10" _gui-text="Scaling factor">1</param>
             <param name="armatureLabel" type="string" _gui-text="Label">Valve</param>
