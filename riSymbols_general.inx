@@ -97,14 +97,6 @@
                 <_option value="-90">-90</_option>
             </param>
         </page>
-        <page name="Colors" appearance="minimal" _gui-text="Colors">
-            <param name="desc1" type="description" appearance="header">Current annotation color</param>
-            <param name="currColor" type="optiongroup" appearance="minimal" _gui-text="Color:">
-                <_option value="#FF0000">default current color</_option>
-                <_option value="picker">use color picker</_option>
-            </param>
-            <param name="colorPickerCurrent" type="color"/>
-        </page>
         <page name="Help" _gui-text="Help">
             <_param name="instructions" type="description" xml:space="preserve">
 For detailed help, see
