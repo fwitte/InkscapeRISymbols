@@ -36,7 +36,8 @@ class compressor(component):
 
         inkDraw.line.relCoords(
             elem, [[self.connectorLength, 0]],
-            [position[0] + self.connectorLength + self.radius * 2, position[1]],
+            [position[0] + self.connectorLength + self.radius * 2,
+             position[1]],
             lineStyle=self.lineStyle
         )
 

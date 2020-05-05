@@ -76,9 +76,6 @@ class RISymbols(pump, compressor, armature):
         self.OptionParser.add_option("--nodeDirection", action="store", type="string", dest="nodeDirection", default='right')
         self.OptionParser.add_option("--nodeScale", action="store", type="int", dest="nodeScale", default='1')
 
-        self.OptionParser.add_option("--currColor", action="store", type="string", dest="currColor", default='#FF0000')
-        self.OptionParser.add_option("--colorPickerCurrent", action="store", type="string", dest="colorPickerCurrent", default='0')
-
     def effect(self):
 
         so = self.options
