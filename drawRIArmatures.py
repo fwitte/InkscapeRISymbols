@@ -55,29 +55,40 @@ class armature(component):
 
         inkDraw.line.relCoords(
             elem, [[self.connectorLength, 0]],
-            [position[0] + self.connectorLength + self.componentExtent, position[1]],
+            [position[0] + self.connectorLength + self.componentExtent,
+             position[1]],
             lineStyle=self.lineStyle)
 
         if armatureType == 'three way valve':
             inkDraw.line.relCoords(
                 elem, [[self.componentExtent / 2, 0]],
-                [position[0] + self.connectorLength + self.componentExtent / 4, position[1] + self.componentExtent / 2],
+                [position[0] + self.connectorLength + self.componentExtent / 4,
+                 position[1] + self.componentExtent / 2],
                 lineStyle=self.lineStyle
             )
 
             inkDraw.line.relCoords(
                 elem, [[self.componentExtent / 4, - self.componentExtent / 2]],
-                [position[0] + self.connectorLength + self.componentExtent / 4, position[1] + self.componentExtent / 2],
+                [position[0] + self.connectorLength + self.componentExtent / 4,
+                 position[1] + self.componentExtent / 2],
                 lineStyle=self.lineStyle
             )
 
             inkDraw.line.relCoords(
-                elem, [[- self.componentExtent / 4, - self.componentExtent / 2]],
-                [position[0] + self.connectorLength + self.componentExtent / 4 * 3, position[1] + self.componentExtent / 2],
+                elem, [[- self.componentExtent / 4,
+                        - self.componentExtent / 2]],
+                [position[0] + self.connectorLength + self.componentExtent
+                 / 4 * 3,
+                 position[1] + self.componentExtent / 2],
                 lineStyle=self.lineStyle
             )
 
-        # self.drawPumpTypeSymbol(elem, direction, position, pumpType)
+        if armatureType == 'ball valve':
+            inkDraw.circle.centerRadius(
+                elem, [self.connectorLength + self.componentExtent / 2, 0],
+                self.scale * 0.5, offset=position, label='circle',
+                lineStyle=inkDraw.lineStyle.set(fillColor='#000000')
+            )
 
         if angleDeg != 0:
             self.rotateElement(group, position, angleDeg)
@@ -95,8 +106,9 @@ class armature(component):
         return group
 
     # ---------------------------------------------
-    def drawExpansionValve(self, parent, position=[0, 0], label='Expansion Valve',
-                           direction='right', angleDeg=0):
+    def drawExpansionValve(self, parent, position=[0, 0],
+                           label='Expansion Valve', direction='right',
+                           angleDeg=0):
         """Draw an expansion valve.
 
         parent: parent object
