@@ -90,6 +90,19 @@ class armature(component):
                 lineStyle=inkDraw.lineStyle.set(fillColor='#000000')
             )
 
+        if armatureType == 'check valve':
+            inkDraw.circle.centerRadius(
+                elem, [self.connectorLength + self.componentExtent / 2, 0],
+                self.scale * 0.5, offset=position, label='circle',
+                lineStyle=inkDraw.lineStyle.set(fillColor='#000000')
+            )
+
+            inkDraw.circle.centerRadius(
+                elem, [self.connectorLength, - self.componentExtent / 4],
+                self.scale * 0.5, offset=position, label='circle',
+                lineStyle=inkDraw.lineStyle.set(fillColor='#000000')
+            )
+
         if angleDeg != 0:
             self.rotateElement(group, position, angleDeg)
 

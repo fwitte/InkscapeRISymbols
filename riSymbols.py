@@ -141,7 +141,8 @@ class RISymbols(pump, compressor, armature):
 
         elif so.tab == 'armatures':
             self.setDimensions(scale=so.armatureScale)
-            if so.armature in ['valve', 'ball valve', 'three way valve']:
+            if so.armature in ['valve', 'ball valve', 'check valve',
+                               'three way valve']:
                 self.drawValve(
                     root_layer, position, label=so.armatureLabel,
                     direction=so.armatureDirection, angleDeg=so.armatureRot,
