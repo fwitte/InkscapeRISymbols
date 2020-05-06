@@ -9,6 +9,7 @@ from drawRIComponents import component
 from drawRICompressors import compressor
 from drawRIPumps import pump
 from drawRIArmatures import armature
+from drawRINodes import node
 
 # some symbol definition
 
@@ -40,7 +41,7 @@ def latexUnitMultiple(valueString):
 
 
 # ---------------------------------------------
-class RISymbols(pump, compressor, armature):
+class RISymbols(pump, compressor, armature, node):
     def __init__(self):
         inkBase.inkscapeMadeEasy.__init__(self)
 
@@ -110,9 +111,9 @@ class RISymbols(pump, compressor, armature):
         position[0] = int(math.ceil(position[0] / 10.0)) * 10
         position[1] = int(math.ceil(position[1] / 10.0)) * 10
 
-        [self.currentColor, alpha] = inkDraw.color.parseColorPicker(
-            so.currColor, so.colorPickerCurrent
-        )
+        # [self.currentColor, alpha] = inkDraw.color.parseColorPicker(
+        #     so.currColor, so.colorPickerCurrent
+        # )
 
         so.pumpRot = float(so.pumpRot)
         so.compressorRot = float(so.compressorRot)
@@ -162,39 +163,39 @@ class RISymbols(pump, compressor, armature):
 
         elif so.tab == 'nodes':
             self.setDimensions(scale=so.nodeScale)
-            if so.armature == 'injection':
+            if so.node == 'injection':
                 self.drawInjection(
-                    root_layer, position, label=so.armatureLabel,
-                    direction=so.armatureDirection, angleDeg=so.armatureRot,
-                    armatureType=so.armature
+                    root_layer, position, label=so.nodeLabel,
+                    direction=so.nodeDirection, angleDeg=so.nodeRot,
+                    nodeType=so.node
                 )
 
-            elif so.armature == 'droplet separator':
+            elif so.node == 'droplet separator':
                 self.drawDropletSeparator(
-                    root_layer, position, label=so.armatureLabel,
-                    direction=so.armatureDirection, angleDeg=so.armatureRot,
-                    armatureType=so.armature
+                    root_layer, position, label=so.nodeLabel,
+                    direction=so.armatureDirection, angleDeg=so.nodeRot,
+                    nodeType=so.node
                 )
 
-            elif so.armature == 'node':
+            elif so.node == 'node':
                 self.drawNode(
-                    root_layer, position, label=so.armatureLabel,
-                    direction=so.armatureDirection, angleDeg=so.armatureRot,
-                    armatureType=so.armature
+                    root_layer, position, label=so.nodeLabel,
+                    direction=so.nodeDirection, angleDeg=so.nodeRot,
+                    nodeType=so.node
                 )
 
-            elif so.armature == 'drum':
+            elif so.node == 'drum':
                 self.drawDrum(
-                    root_layer, position, label=so.armatureLabel,
-                    direction=so.armatureDirection, angleDeg=so.armatureRot,
-                    armatureType=so.armature
+                    root_layer, position, label=so.nodeLabel,
+                    direction=so.nodeDirection, angleDeg=so.nodeRot,
+                    nodeType=so.node
                 )
 
-            elif so.armature == 'injection':
+            elif so.node == 'injection':
                 self.drawInjection(
-                    root_layer, position, label=so.armatureLabel,
-                    direction=so.armatureDirection, angleDeg=so.armatureRot,
-                    armatureType=so.armature
+                    root_layer, position, label=so.nodeLabel,
+                    direction=so.nodeDirection, angleDeg=so.nodeRot,
+                    nodeType=so.node
                 )
 
         elif so.tab == 'piping':
