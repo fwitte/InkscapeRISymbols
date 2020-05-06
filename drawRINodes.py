@@ -68,9 +68,7 @@ class node(component):
                 lineStyle=self.lineStyle)
 
             # change label position depending on chosen direction
-            text_x_offset = (position[0]
-                             - self.connectorLength
-                             - self.textOffset * self.scale)
+            text_x_offset = (position[0] - self.connectorLength)
 
         elif direction == 'left':
             # draw upper diagonal connector
@@ -92,8 +90,7 @@ class node(component):
             # change label position depending on chosen direction
             text_x_offset = (position[0]
                              + self.componentExtent
-                             + self.connectorLength
-                             + self.textOffset * self.scale)
+                             + self.connectorLength)
 
         # change rotation to user defined angle
         if angleDeg != 0:
@@ -103,7 +100,7 @@ class node(component):
 
         inkDraw.text.write(
             self, label, pos_text, group, fontSize=self.fontSize,
-            justification='center', textStyle=self.textStyle
+            justification=direction, textStyle=self.textStyle
         )
 
         return group
