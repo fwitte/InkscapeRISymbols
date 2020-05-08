@@ -10,6 +10,7 @@ from drawRICompressors import compressor
 from drawRIPumps import pump
 from drawRIArmatures import armature
 from drawRINodes import node
+from drawRITurbines import turbine
 
 # some symbol definition
 
@@ -41,7 +42,7 @@ def latexUnitMultiple(valueString):
 
 
 # ---------------------------------------------
-class RISymbols(pump, compressor, armature, node):
+class RISymbols(pump, compressor, turbine, armature, node):
     def __init__(self):
         inkBase.inkscapeMadeEasy.__init__(self)
 
@@ -58,6 +59,13 @@ class RISymbols(pump, compressor, armature, node):
         self.OptionParser.add_option("--compressorRot", action="store", type="string", dest="compressorRot", default='0')
         self.OptionParser.add_option("--compressorDirection", action="store", type="string", dest="compressorDirection", default='right')
         self.OptionParser.add_option("--compressorScale", action="store", type="int", dest="compressorScale", default='1')
+
+        self.OptionParser.add_option("--turbine", action="store", type="string", dest="turbine", default='Default')
+        self.OptionParser.add_option("--turbineLabel", action="store", type="string", dest="turbineLabel", default='Turbine')
+        self.OptionParser.add_option("--turbineCon", action="store", type="string", dest="turbineCon", default='Crossed')
+        self.OptionParser.add_option("--turbineMirror", action="store", type="string", dest="turbineMirror", default='Off')
+        self.OptionParser.add_option("--turbineExtraction", action="store", type="string", dest="turbineExtraction", default='Off')
+        self.OptionParser.add_option("--turbineScale", action="store", type="int", dest="turbineScale", default='1')
 
         self.OptionParser.add_option("--pipe", action="store", type="string", dest="pipe", default='Default')
         self.OptionParser.add_option("--pipeLabel", action="store", type="string", dest="pipeLabel", default='Pipe')
@@ -137,19 +145,20 @@ class RISymbols(pump, compressor, armature, node):
                 compressorType=so.compressor
             )
 
+        elif so.tab == 'turbine':
+            self.setDimensions(scale=so.turbineScale)
+            self.drawTurbine(
+                root_layer, position, label=so.turbineLabel,
+                connection=so.turbineCon, mirroring=so.turbineMirror,
+                extraction=so.turbineExtraction, turbineType=so.turbine
+            )
+
         elif so.tab == 'armatures':
             self.setDimensions(scale=so.armatureScale)
             if so.armature in ['valve', 'ball valve', 'check valve',
                                'three way valve', 'three way ball valve',
                                'gate valve']:
                 self.drawValve(
-                    root_layer, position, label=so.armatureLabel,
-                    direction=so.armatureDirection, angleDeg=so.armatureRot,
-                    armatureType=so.armature
-                )
-
-            elif so.armature == 'check valve':
-                self.drawCheckValve(
                     root_layer, position, label=so.armatureLabel,
                     direction=so.armatureDirection, angleDeg=so.armatureRot,
                     armatureType=so.armature
@@ -163,8 +172,15 @@ class RISymbols(pump, compressor, armature, node):
 
         elif so.tab == 'nodes':
             self.setDimensions(scale=so.nodeScale)
-            if so.node == 'injection':
-                self.drawInjection(
+            if so.node in ['node', 'splitter', 'merge']:
+                self.drawNode(
+                    root_layer, position, label=so.nodeLabel,
+                    direction=so.nodeDirection, angleDeg=so.nodeRot,
+                    nodeType=so.node
+                )
+
+            elif so.node in ['source', 'sink', 'cyclecloser']:
+                self.drawBasic(
                     root_layer, position, label=so.nodeLabel,
                     direction=so.nodeDirection, angleDeg=so.nodeRot,
                     nodeType=so.node
@@ -172,13 +188,6 @@ class RISymbols(pump, compressor, armature, node):
 
             elif so.node == 'droplet separator':
                 self.drawDropletSeparator(
-                    root_layer, position, label=so.nodeLabel,
-                    direction=so.armatureDirection, angleDeg=so.nodeRot,
-                    nodeType=so.node
-                )
-
-            elif so.node == 'node':
-                self.drawNode(
                     root_layer, position, label=so.nodeLabel,
                     direction=so.nodeDirection, angleDeg=so.nodeRot,
                     nodeType=so.node

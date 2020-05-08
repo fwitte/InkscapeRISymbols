@@ -43,6 +43,26 @@
                 <_option value="right">right</_option>
             </param>
         </page>
+        <page name="turbine" appearance="minimal" _gui-text="Turbines">
+            <param name="turbine" type="optiongroup" appearance="minimal" _gui-text="Type:">
+                <_option value="turbine">Default</_option>
+            </param>
+            <param name="turbineScale" type="int" min="1" max="10" _gui-text="Scaling factor">1</param>
+            <param name="turbineLabel" type="string" _gui-text="Label">Turbine</param>
+            <param name="turbineCon" type="optiongroup" appearance="minimal" _gui-text="Connections Orientation:">
+                <_option value="crossed">Crossed</_option>
+                <_option value="equal">Equal</_option>
+            </param>
+            <param name="turbineMirror" type="optiongroup" appearance="minimal" _gui-text="Mirror vertically:">
+                <_option value="mirOn">On</_option>
+                <_option value="mirOff">Off</_option>
+            </param>
+            <param name="turbineExtraction" type="optiongroup" appearance="minimal" _gui-text="Extraction:">
+                <_option value="extrOff">Off</_option>
+                <_option value="extrTop">Top</_option>
+                <_option value="extrDown">Down</_option>
+            </param>
+        </page>
         <page name="armatures" appearance="minimal" _gui-text="Armatures">
             <param name="armature" type="optiongroup" appearance="minimal" _gui-text="Type:">
                 <_option value="valve">Valve</_option>
@@ -68,6 +88,11 @@
         <page name="nodes" appearance="minimal" _gui-text="Nodes">
             <param name="node" type="optiongroup" appearance="minimal" _gui-text="Type:">
                 <_option value="node">Node</_option>
+                <_option value="splitter">Splitter</_option>
+                <_option value="merge">Merge</_option>
+                <_option value="source">Source</_option>
+                <_option value="sink">Sink</_option>
+                <_option value="cyclecloser">Cyclecloser</_option>
                 <_option value="droplet separator">Droplet Separator</_option>
                 <_option value="drum">Drum</_option>
                 <_option value="feed water tank">Feed water tank</_option>
