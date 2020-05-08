@@ -146,13 +146,12 @@ class node(component):
 
         # label position
         pos_text = [
-            position[0] + self.componentExtent * 1.5 + (3 * self.scale),
-            position[1] + self.componentExtent / (4 * self.scale) -
-            self.textOffset * self.scale]
+            position[0] + self.componentExtent,
+            position[1] - self.componentExtent]
 
         inkDraw.text.write(
             self, label, pos_text, group, fontSize=self.fontSize,
-            justification='left', textStyle=self.textStyle
+            justification='center', textStyle=self.textStyle
         )
 
         return group
