@@ -23,33 +23,64 @@ class node(component):
         group = self.createGroup(parent, label)
         elem = self.createGroup(group)
 
-        # left side
-        inkDraw.line.relCoords(
-            elem, [[0, self.componentExtent]],
-            [position[0],position[1] - self.componentExtent / 2],
-            lineStyle=self.lineStyle
-        )
-
-        # diagonally top right
-        inkDraw.line.relCoords(
-            elem, [[self.componentExtent, - self.componentExtent / 2]],
-            [position[0], position[1] + self.componentExtent / 2],
-            lineStyle=self.lineStyle
-        )
-
-        # diagonally down left
-        inkDraw.line.relCoords(
-            elem, [[self.componentExtent, self.componentExtent / 2]],
-            [position[0], position[1] - self.componentExtent / 2],
-            lineStyle=self.lineStyle
-        )
-
-        # connector right
-        inkDraw.line.relCoords(
-            elem, [[self.connectorLength, 0]],
-            [position[0] + self.componentExtent, position[1]],
-            lineStyle=self.lineStyle
+        if nodeType == 'source':
+            # left side
+            inkDraw.line.relCoords(
+                elem, [[0, self.componentExtent]],
+                [position[0],position[1] - self.componentExtent / 2],
+                lineStyle=self.lineStyle
             )
+
+            # diagonally top right
+            inkDraw.line.relCoords(
+                elem, [[self.componentExtent, - self.componentExtent / 2]],
+                [position[0], position[1] + self.componentExtent / 2],
+                lineStyle=self.lineStyle
+            )
+
+            # diagonally down left
+            inkDraw.line.relCoords(
+                elem, [[self.componentExtent, self.componentExtent / 2]],
+                [position[0], position[1] - self.componentExtent / 2],
+                lineStyle=self.lineStyle
+            )
+
+            # connector right
+            inkDraw.line.relCoords(
+                elem, [[self.connectorLength, 0]],
+                [position[0] + self.componentExtent, position[1]],
+                lineStyle=self.lineStyle
+                )
+
+        elif nodeType == 'sink':
+                # left side
+                inkDraw.line.relCoords(
+                    elem, [[0, self.componentExtent]],
+                    [position[0] + self.componentExtent * 1.5,
+                    position[1] - self.componentExtent / 2],
+                    lineStyle=self.lineStyle
+                )
+
+                # diagonally top right
+                inkDraw.line.relCoords(
+                    elem, [[self.componentExtent, - self.componentExtent / 2]],
+                    [position[0] + self.connectorLength, position[1]],
+                    lineStyle=self.lineStyle
+                )
+
+                # diagonally down left
+                inkDraw.line.relCoords(
+                    elem, [[self.componentExtent, self.componentExtent / 2]],
+                    [position[0] + self.connectorLength, position[1]],
+                    lineStyle=self.lineStyle
+                )
+
+                # connector right
+                inkDraw.line.relCoords(
+                    elem, [[self.connectorLength, 0]],
+                    position,
+                    lineStyle=self.lineStyle
+                )
 
         return group
 
