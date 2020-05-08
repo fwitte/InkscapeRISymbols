@@ -7,8 +7,28 @@ from drawRIComponents import component
 
 from numpy import sqrt, sin, cos, pi
 
-
 class node(component):
+    # ---------------------------------------------
+    def drawNode(self, parent, position=[0, 0], label='Node',
+                 direction='right', angleDeg=0, nodeType='node'):
+        """Draw a node, splitter and merge.
+
+        parent: parent object
+        position: position [x,y]
+
+        label: label of the object (it can be repeated)
+        angleDeg: rotation angle in degrees counter-clockwise (default 0)
+        """
+        group = self.createGroup(parent, label)
+        elem = self.createGroup(group)
+
+        inkDraw.circle.centerRadius(
+            elem, [self.connectorLength + self.componentExtent / 2, 0],
+            self.scale * 0.5, offset=position, label='circle',
+            lineStyle=inkDraw.lineStyle.set(fillColor='#000000')
+        )
+        return group
+
     # ---------------------------------------------
     def drawDrum(self, parent, position=[0, 0], label='Drum',
                  direction='right', angleDeg=0, nodeType='drum'):

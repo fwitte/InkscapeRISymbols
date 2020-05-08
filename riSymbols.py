@@ -164,13 +164,6 @@ class RISymbols(pump, compressor, turbine, armature, node):
                     armatureType=so.armature
                 )
 
-            elif so.armature == 'check valve':
-                self.drawCheckValve(
-                    root_layer, position, label=so.armatureLabel,
-                    direction=so.armatureDirection, angleDeg=so.armatureRot,
-                    armatureType=so.armature
-                )
-
             elif so.armature == 'expansion valve':
                 self.drawExpansionValve(
                     root_layer, position, label=so.armatureLabel,
@@ -179,8 +172,15 @@ class RISymbols(pump, compressor, turbine, armature, node):
 
         elif so.tab == 'nodes':
             self.setDimensions(scale=so.nodeScale)
-            if so.node == 'injection':
-                self.drawInjection(
+            if so.node in ['node', 'splitter', 'merge']:
+                self.drawNode(
+                    root_layer, position, label=so.nodeLabel,
+                    direction=so.nodeDirection, angleDeg=so.nodeRot,
+                    nodeType=so.node
+                )
+
+            elif so.node in ['source', 'sink', 'cyclecloser']:
+                self.drawBasic(
                     root_layer, position, label=so.nodeLabel,
                     direction=so.nodeDirection, angleDeg=so.nodeRot,
                     nodeType=so.node
@@ -188,13 +188,6 @@ class RISymbols(pump, compressor, turbine, armature, node):
 
             elif so.node == 'droplet separator':
                 self.drawDropletSeparator(
-                    root_layer, position, label=so.nodeLabel,
-                    direction=so.armatureDirection, angleDeg=so.nodeRot,
-                    nodeType=so.node
-                )
-
-            elif so.node == 'node':
-                self.drawNode(
                     root_layer, position, label=so.nodeLabel,
                     direction=so.nodeDirection, angleDeg=so.nodeRot,
                     nodeType=so.node
