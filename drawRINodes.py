@@ -136,13 +136,24 @@ class node(component):
                  position[1] - self.componentExtent / 2],
                 lineStyle=self.lineStyle
             )
-            
+
             # connector right
             inkDraw.line.relCoords(
                 elem, [[- self.connectorLength, 0]],
                 [position[0] - self.componentExtent, position[1]],
                 lineStyle=self.lineStyle
             )
+
+        # label position
+        pos_text = [
+            position[0] + self.componentExtent * 1.5 + (3 * self.scale),
+            position[1] + self.componentExtent / (4 * self.scale) -
+            self.textOffset * self.scale]
+
+        inkDraw.text.write(
+            self, label, pos_text, group, fontSize=self.fontSize,
+            justification='left', textStyle=self.textStyle
+        )
 
         return group
 
