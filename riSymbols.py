@@ -198,15 +198,15 @@ class RISymbols(pump, compressor, turbine, heat_exchanger, armature, node):
 
         elif so.tab == 'nodes':
             self.setDimensions(scale=so.nodeScale)
-            if so.node in ['node', 'splitter', 'merge']:
-                self.drawNode(
+            if so.node in ['source', 'sink', 'cyclecloser']:
+                self.drawBasic(
                     root_layer, position, label=so.nodeLabel,
                     direction=so.nodeDirection, angleDeg=so.nodeRot,
                     nodeType=so.node
                 )
 
-            elif so.node in ['source', 'sink', 'cyclecloser']:
-                self.drawBasic(
+            elif so.node == 'node':
+                self.drawNode(
                     root_layer, position, label=so.nodeLabel,
                     direction=so.nodeDirection, angleDeg=so.nodeRot,
                     nodeType=so.node

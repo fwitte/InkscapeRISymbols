@@ -61,6 +61,8 @@
                 <_option value="extrOff">Off</_option>
                 <_option value="extrTop">Top</_option>
                 <_option value="extrDown">Down</_option>
+            </param>
+        </page>
         <page name="heat_exchanger" appearance="minimal" _gui-text="Heat Exchangers">
             <param name="heat_exchanger" type="optiongroup" appearance="minimal" _gui-text="Type:">
                 <_option value="generic">Default</_option>
@@ -108,8 +110,6 @@
         <page name="nodes" appearance="minimal" _gui-text="Nodes">
             <param name="node" type="optiongroup" appearance="minimal" _gui-text="Type:">
                 <_option value="node">Node</_option>
-                <_option value="splitter">Splitter</_option>
-                <_option value="merge">Merge</_option>
                 <_option value="source">Source</_option>
                 <_option value="sink">Sink</_option>
                 <_option value="cyclecloser">Cyclecloser</_option>

@@ -7,11 +7,12 @@ from drawRIComponents import component
 
 from numpy import sqrt, sin, cos, pi
 
+
 class node(component):
     # ---------------------------------------------
-    def drawNode(self, parent, position=[0, 0], label='Node',
+    def drawBasic(self, parent, position=[0, 0], label='Node',
                  direction='right', angleDeg=0, nodeType='node'):
-        """Draw a node, splitter and merge.
+        """Draw a source, sink and cyclecloser.
 
         parent: parent object
         position: position [x,y]
@@ -22,11 +23,79 @@ class node(component):
         group = self.createGroup(parent, label)
         elem = self.createGroup(group)
 
+        # left side
+        inkDraw.line.relCoords(
+            elem, [[0, self.componentExtent]],
+            [position[0],position[1] - self.componentExtent / 2],
+            lineStyle=self.lineStyle
+        )
+
+        # diagonally top right
+        inkDraw.line.relCoords(
+            elem, [[self.componentExtent, - self.componentExtent / 2]],
+            [position[0], position[1] + self.componentExtent / 2],
+            lineStyle=self.lineStyle
+        )
+
+        # diagonally down left
+        inkDraw.line.relCoords(
+            elem, [[self.componentExtent, self.componentExtent / 2]],
+            [position[0], position[1] - self.componentExtent / 2],
+            lineStyle=self.lineStyle
+        )
+
+        # connector right
+        inkDraw.line.relCoords(
+            elem, [[self.connectorLength, 0]],
+            [position[0] + self.componentExtent, position[1]],
+            lineStyle=self.lineStyle
+            )
+
+        return group
+
+    # ---------------------------------------------
+    def drawNode(self, parent, position=[0, 0], label='Node',
+                 direction='right', angleDeg=0, nodeType='node'):
+        """Draw a node.
+
+        parent: parent object
+        position: position [x,y]
+
+        label: label of the object (it can be repeated)
+        angleDeg: rotation angle in degrees counter-clockwise (default 0)
+        """
+        group = self.createGroup(parent, label)
+        elem = self.createGroup(group)
+
+        # create node
         inkDraw.circle.centerRadius(
-            elem, [self.connectorLength + self.componentExtent / 2, 0],
+            elem, [0, 0],
             self.scale * 0.5, offset=position, label='circle',
             lineStyle=inkDraw.lineStyle.set(fillColor='#000000')
         )
+
+        # connector left
+        inkDraw.line.relCoords(
+            elem, [[- self.connectorLength, 0]], position,
+            lineStyle=self.lineStyle
+            )
+
+        # connector right
+        inkDraw.line.relCoords(
+            elem, [[self.connectorLength, 0]], position,
+            lineStyle=self.lineStyle
+            )
+
+        # connector up
+        inkDraw.line.relCoords(
+            elem, [[0, - self.connectorLength]], position,
+            lineStyle=self.lineStyle)
+
+        # connector down
+        inkDraw.line.relCoords(
+            elem, [[0, self.connectorLength]], position,
+            lineStyle=self.lineStyle)
+
         return group
 
     # ---------------------------------------------
