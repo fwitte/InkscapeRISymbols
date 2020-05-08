@@ -8,6 +8,7 @@ import inkscapeMadeEasy_Draw as inkDraw
 from drawRIComponents import component
 from drawRICompressors import compressor
 from drawRIPumps import pump
+from drawRIHeatExchangers import heat_exchanger
 from drawRIArmatures import armature
 from drawRINodes import node
 from drawRITurbines import turbine
@@ -42,7 +43,7 @@ def latexUnitMultiple(valueString):
 
 
 # ---------------------------------------------
-class RISymbols(pump, compressor, turbine, armature, node):
+class RISymbols(pump, compressor, turbine, heat_exchanger, armature, node):
     def __init__(self):
         inkBase.inkscapeMadeEasy.__init__(self)
 
@@ -66,6 +67,12 @@ class RISymbols(pump, compressor, turbine, armature, node):
         self.OptionParser.add_option("--turbineMirror", action="store", type="string", dest="turbineMirror", default='Off')
         self.OptionParser.add_option("--turbineExtraction", action="store", type="string", dest="turbineExtraction", default='Off')
         self.OptionParser.add_option("--turbineScale", action="store", type="int", dest="turbineScale", default='1')
+
+        self.OptionParser.add_option("--heat_exchanger", action="store", type="string", dest="heat_exchanger", default='Default')
+        self.OptionParser.add_option("--heat_exchangerLabel", action="store", type="string", dest="heat_exchangerLabel", default='Default')
+        self.OptionParser.add_option("--heat_exchangerRot", action="store", type="string", dest="heat_exchangerRot", default='0')
+        self.OptionParser.add_option("--heat_exchangerDirection", action="store", type="string", dest="heat_exchangerDirection", default='right')
+        self.OptionParser.add_option("--heat_exchangerScale", action="store", type="int", dest="heat_exchangerScale", default='1')
 
         self.OptionParser.add_option("--pipe", action="store", type="string", dest="pipe", default='Default')
         self.OptionParser.add_option("--pipeLabel", action="store", type="string", dest="pipeLabel", default='Pipe')
@@ -125,6 +132,7 @@ class RISymbols(pump, compressor, turbine, armature, node):
 
         so.pumpRot = float(so.pumpRot)
         so.compressorRot = float(so.compressorRot)
+        so.heat_exchangerRot = float(so.heat_exchangerRot)
         so.pipeRot = float(so.pipeRot)
         so.armatureRot = float(so.armatureRot)
         so.nodeRot = float(so.nodeRot)
@@ -152,6 +160,24 @@ class RISymbols(pump, compressor, turbine, armature, node):
                 connection=so.turbineCon, mirroring=so.turbineMirror,
                 extraction=so.turbineExtraction, turbineType=so.turbine
             )
+
+        elif so.tab == 'heat_exchanger':
+            self.setDimensions(scale=so.heat_exchangerScale)
+            if so.heat_exchanger == 'generic':
+                self.drawGeneric(
+                    root_layer, position, label=so.heat_exchangerLabel,
+                    direction=so.heat_exchangerDirection,
+                    angleDeg=so.heat_exchangerRot,
+                    heat_exchangerType=so.heat_exchanger
+                )
+
+            elif so.heat_exchanger == 'genericX':
+                self.drawGenericX(
+                    root_layer, position, label=so.heat_exchangerLabel,
+                    direction=so.heat_exchangerDirection,
+                    angleDeg=so.heat_exchangerRot,
+                    heat_exchangerType=so.heat_exchanger
+                )
 
         elif so.tab == 'armatures':
             self.setDimensions(scale=so.armatureScale)
