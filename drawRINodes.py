@@ -144,10 +144,13 @@ class node(component):
                 lineStyle=self.lineStyle
             )
 
-        # label position
+        if angleDeg != 0:
+            self.rotateElement(group, position, angleDeg)
+
         pos_text = [
-            position[0] + self.componentExtent,
-            position[1] - self.componentExtent]
+            position[0] + self.connectorLength + self.componentExtent / 2,
+            position[1] - self.componentExtent / (4 * self.scale) -
+            self.textOffset * self.scale]
 
         inkDraw.text.write(
             self, label, pos_text, group, fontSize=self.fontSize,
