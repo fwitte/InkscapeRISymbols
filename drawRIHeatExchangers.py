@@ -132,7 +132,7 @@ class heat_exchanger(component):
 
     def drawGenericX(self, parent, position=[0, 0], label='Heat Exchanger',
                      direction='right', angleDeg=0,
-                     heat_exchangerType='generic'):
+                     heat_exchangerType='genericX'):
         """Draw a heat exchanger.
 
         parent: parent object
@@ -190,11 +190,39 @@ class heat_exchanger(component):
             lineStyle=self.lineStyle)
 
         # lower connector
-        inkDraw.line.relCoords(
-            elem, [[0, self.connectorLength]],
-            [position[0] + self.componentExtent / 2,
-             position[1] + self.componentExtent / 2],
-            lineStyle=self.lineStyle)
+        if heat_exchangerType == 'genericX':
+            inkDraw.line.relCoords(
+                elem, [[0, self.connectorLength]],
+                [position[0] + self.componentExtent / 2,
+                 position[1] + self.componentExtent / 2],
+                lineStyle=self.lineStyle)
+        elif heat_exchangerType == 'condenser':
+            inkDraw.line.relCoords(
+                elem, [[0, self.connectorLength]],
+                [position[0] + self.componentExtent / 2,
+                 position[1] + self.componentExtent * 3 / 4],
+                lineStyle=self.lineStyle)
+
+            # bottom line of condensate container
+            inkDraw.line.relCoords(
+                elem, [[self.componentExtent / 2, 0]],
+                [position[0] + self.componentExtent / 4,
+                 position[1] + self.componentExtent * 3 / 4],
+                lineStyle=self.lineStyle)
+
+            # left line of condensate container
+            inkDraw.line.relCoords(
+                elem, [[0, self.componentExtent / 4]],
+                [position[0] + self.componentExtent / 4,
+                 position[1] + self.componentExtent / 2],
+                lineStyle=self.lineStyle)
+
+            # right line of condensate container
+            inkDraw.line.relCoords(
+                elem, [[0, self.componentExtent / 4]],
+                [position[0] + self.componentExtent * 3 / 4,
+                 position[1] + self.componentExtent / 2],
+                lineStyle=self.lineStyle)
 
         # draw heat receiving medium
         # centered vertical line
