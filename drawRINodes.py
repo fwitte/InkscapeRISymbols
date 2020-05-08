@@ -7,6 +7,7 @@ from drawRIComponents import component
 
 from numpy import sqrt, sin, cos, pi
 
+
 class node(component):
     # ---------------------------------------------
     def drawNode(self, parent, position=[0, 0], label='Node',

@@ -61,6 +61,8 @@
                 <_option value="extrOff">Off</_option>
                 <_option value="extrTop">Top</_option>
                 <_option value="extrDown">Down</_option>
+            </param>
+        </page>
         <page name="heat_exchanger" appearance="minimal" _gui-text="Heat Exchangers">
             <param name="heat_exchanger" type="optiongroup" appearance="minimal" _gui-text="Type:">
                 <_option value="generic">Default</_option>
