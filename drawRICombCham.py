@@ -100,4 +100,18 @@ class combustion_chamber(component):
             lineStyle=self.lineStyle
             )
 
+        # Roating components
+        if angleDeg != 0:
+            self.rotateElement(group, position, angleDeg)
+
+        # Labeling
+        pos_text = [
+            position[0] + self.componentExtent,
+            position[1] - self.componentExtent]
+
+        inkDraw.text.write(
+            self, label, pos_text, group, fontSize=self.fontSize,
+            justification='left', textStyle=self.textStyle
+        )
+
         return group
