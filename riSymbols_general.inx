@@ -107,6 +107,20 @@
                 <_option value="right">right</_option>
             </param>
         </page>
+
+        <page name="combustion_chamber" appearance="minimal" _gui-text="Combustion Chambers">
+            <param name="combustion_chamber" type="optiongroup" appearance="minimal" _gui-text="Type:">
+                <_option value="comb_cham">Default</_option>
+            </param>
+            <param name="comb_chamScale" type="int" min="1" max="10" _gui-text="Scaling factor">1</param>
+            <param name="comb_chamLabel" type="string" _gui-text="Label">Valve</param>
+            <param name="comb_chamRot" type="optiongroup" appearance="minimal" _gui-text="Label Orientation (deg):">
+                <_option value="0">0</_option>
+                <_option value="90">90</_option>
+                <_option value="-90">-90</_option>
+            </param>
+        </page>
+
         <page name="nodes" appearance="minimal" _gui-text="Nodes">
             <param name="node" type="optiongroup" appearance="minimal" _gui-text="Type:">
                 <_option value="node">Node</_option>
