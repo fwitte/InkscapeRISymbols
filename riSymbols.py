@@ -12,7 +12,8 @@ from drawRIHeatExchangers import heat_exchanger
 from drawRIArmatures import armature
 from drawRINodes import node
 from drawRITurbines import turbine
-from drawRICombCham import combustion_chamber
+from drawRICombChams import combustion_chamber
+from drawRIElecMaschines import elec_maschine
 
 # some symbol definition
 
@@ -44,7 +45,7 @@ def latexUnitMultiple(valueString):
 
 
 # ---------------------------------------------
-class RISymbols(pump, compressor, turbine, heat_exchanger, armature, combustion_chamber, node):
+class RISymbols(pump, compressor, turbine, elec_maschine, heat_exchanger, armature, combustion_chamber, node):
     def __init__(self):
         inkBase.inkscapeMadeEasy.__init__(self)
 
@@ -68,6 +69,11 @@ class RISymbols(pump, compressor, turbine, heat_exchanger, armature, combustion_
         self.OptionParser.add_option("--turbineMirror", action="store", type="string", dest="turbineMirror", default='Off')
         self.OptionParser.add_option("--turbineExtraction", action="store", type="string", dest="turbineExtraction", default='Off')
         self.OptionParser.add_option("--turbineScale", action="store", type="int", dest="turbineScale", default='1')
+
+        self.OptionParser.add_option("--elec_maschine", action="store", type="string", dest="elec_maschine", default='Generator')
+        self.OptionParser.add_option("--elec_maschineLabel", action="store", type="string", dest="elec_maschineLabel", default='Elec Maschine')
+        self.OptionParser.add_option("--elec_maschineDirection", action="store", type="string", dest="elec_maschineDirection", default='right')
+        self.OptionParser.add_option("--elec_maschineScale", action="store", type="int", dest="elec_maschineScale", default='1')
 
         self.OptionParser.add_option("--heat_exchanger", action="store", type="string", dest="heat_exchanger", default='Default')
         self.OptionParser.add_option("--heat_exchangerLabel", action="store", type="string", dest="heat_exchangerLabel", default='Default')
@@ -166,6 +172,14 @@ class RISymbols(pump, compressor, turbine, heat_exchanger, armature, combustion_
                 root_layer, position, label=so.turbineLabel,
                 connection=so.turbineCon, mirroring=so.turbineMirror,
                 extraction=so.turbineExtraction, turbineType=so.turbine
+            )
+
+        elif so.tab == 'elec_maschine':
+            self.setDimensions(scale=so.elec_maschineScale)
+            self.drawElecMaschine(
+                root_layer, position, label=so.elec_maschineLabel,
+                direction=so.elec_maschineDirection,
+                elec_maschineType=so.elec_maschine
             )
 
         elif so.tab == 'heat_exchanger':
