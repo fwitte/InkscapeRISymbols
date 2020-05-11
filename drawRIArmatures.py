@@ -193,54 +193,96 @@ class armature(component):
         group = self.createGroup(parent, label)
         elem = self.createGroup(group)
 
+        # draw component orientation based on users choice
+        if direction == 'right':
+            # draw left vertical line
+            inkDraw.line.relCoords(
+                elem, [[0, self.componentExtent / 3]],
+                [position[0] + self.connectorLength,
+                 position[1] - self.componentExtent / 6],
+                lineStyle=self.lineStyle
+            )
+
+            # draw right vertical line
+            inkDraw.line.relCoords(
+                elem, [[0, self.componentExtent / 3 * 2]],
+                [position[0] + self.connectorLength + self.componentExtent,
+                 position[1] - self.componentExtent / 3],
+                lineStyle=self.lineStyle
+            )
+
+            # draw ascending diagonal
+            inkDraw.line.relCoords(
+                elem, [[self.componentExtent, -self.componentExtent / 2]],
+                [position[0] + self.connectorLength,
+                 position[1] + self.componentExtent / 6],
+                lineStyle=self.lineStyle
+            )
+
+            # draw decending diagonal
+            inkDraw.line.relCoords(
+                elem, [[self.componentExtent, self.componentExtent / 2]],
+                [position[0] + self.connectorLength,
+                 position[1] - self.componentExtent / 6],
+                lineStyle=self.lineStyle
+            )
+
+        elif direction == 'left':
+            # draw left vertical line
+            inkDraw.line.relCoords(
+                elem, [[0, self.componentExtent / 3 * 2]],
+                [position[0] + self.connectorLength,
+                 position[1] - self.componentExtent / 3],
+                lineStyle=self.lineStyle
+            )
+
+            # draw right vertical line
+            inkDraw.line.relCoords(
+                elem, [[0, self.componentExtent / 3]],
+                [position[0] + self.connectorLength + self.componentExtent,
+                 position[1] - self.componentExtent / 6],
+                lineStyle=self.lineStyle
+            )
+
+            # draw ascending diagonal
+            inkDraw.line.relCoords(
+                elem, [[self.componentExtent, -self.componentExtent / 2]],
+                [position[0] + self.connectorLength,
+                 position[1] + self.componentExtent / 3],
+                lineStyle=self.lineStyle
+            )
+
+            # draw decending diagonal
+            inkDraw.line.relCoords(
+                elem, [[self.componentExtent, self.componentExtent / 2]],
+                [position[0] + self.connectorLength,
+                 position[1] - self.componentExtent / 3],
+                lineStyle=self.lineStyle
+            )
+
+        # draw left connector
         inkDraw.line.relCoords(
             elem, [[self.connectorLength, 0]], position,
             lineStyle=self.lineStyle)
 
-        inkDraw.line.relCoords(
-            elem, [[0, self.componentExtent / 3]],
-            [position[0] + self.connectorLength,
-             position[1] - self.componentExtent / 6],
-            lineStyle=self.lineStyle
-        )
-
-        inkDraw.line.relCoords(
-            elem, [[self.componentExtent, -self.componentExtent / 2]],
-            [position[0] + self.connectorLength,
-             position[1] + self.componentExtent / 6],
-            lineStyle=self.lineStyle
-        )
-
-        inkDraw.line.relCoords(
-            elem, [[self.componentExtent, self.componentExtent / 2]],
-            [position[0] + self.connectorLength,
-             position[1] - self.componentExtent / 6],
-            lineStyle=self.lineStyle
-        )
-
-        inkDraw.line.relCoords(
-            elem, [[0, self.componentExtent / 3 * 2]],
-            [position[0] + self.connectorLength + self.componentExtent,
-             position[1] - self.componentExtent / 3],
-            lineStyle=self.lineStyle
-        )
-
+        # draw right connector
         inkDraw.line.relCoords(
             elem, [[self.connectorLength, 0]],
             [position[0] + self.connectorLength + self.componentExtent,
              position[1]],
             lineStyle=self.lineStyle)
 
-        # self.drawPumpTypeSymbol(elem, direction, position, pumpType)
-
+        # rotate component depending on users choice
         if angleDeg != 0:
             self.rotateElement(group, position, angleDeg)
 
+        # label position
         pos_text = [
             position[0] + self.connectorLength + self.componentExtent / 2,
             position[1] - self.componentExtent / (4 * self.scale) -
             self.textOffset * self.scale]
 
+        # draw label
         inkDraw.text.write(
             self, label, pos_text, group, fontSize=self.fontSize,
             justification='center', textStyle=self.textStyle
