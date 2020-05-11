@@ -63,6 +63,18 @@
                 <_option value="extrDown">Down</_option>
             </param>
         </page>
+        <page name="elec_maschine" appearance="minimal" _gui-text="Elec Maschine">
+            <param name="elec_maschine" type="optiongroup" appearance="minimal" _gui-text="Type:">
+                <_option value="generator">Generator</_option>
+                <_option value="e_motor">Elec Motor</_option>
+            </param>
+            <param name="elec_maschineScale" type="int" min="1" max="10" _gui-text="Scaling factor">1</param>
+            <param name="elec_maschineLabel" type="string" _gui-text="Label">Elec Maschine</param>
+            <param name="elec_maschineDirection" type="optiongroup" appearance="minimal" _gui-text="Flow Direction:">
+                <_option value="left">left</_option>
+                <_option value="right">right</_option>
+            </param>
+        </page>
         <page name="heat_exchanger" appearance="minimal" _gui-text="Heat Exchangers">
             <param name="heat_exchanger" type="optiongroup" appearance="minimal" _gui-text="Type:">
                 <_option value="generic">Default</_option>
