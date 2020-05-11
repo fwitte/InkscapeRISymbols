@@ -130,6 +130,7 @@ class turbine(component):
                     lineStyle=self.lineStyle
                 )
 
+        # extraction top
         if extraction == 'extrTop':
             inkDraw.line.relCoords(
                 elem, [[0, - self.connectorLength]],
@@ -138,6 +139,7 @@ class turbine(component):
                 lineStyle=self.lineStyle
             )
 
+        # extraction down
         if extraction == 'extrDown':
             inkDraw.line.relCoords(
                 elem, [[0, + self.connectorLength]],
