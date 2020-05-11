@@ -5,7 +5,7 @@ import inkscapeMadeEasy_Draw as inkDraw
 
 from drawRIComponents import component
 
-# from numpy import sqrt, sin, cos, pi
+from numpy import sqrt, sin, cos, pi
 
 
 class heat_exchanger(component):
@@ -425,6 +425,87 @@ class heat_exchanger(component):
         inkDraw.text.write(
             self, label, pos_text, group, fontSize=self.fontSize,
             justification=direction, textStyle=self.textStyle
+        )
+
+        return group
+
+    # ---------------------------------------------
+    def drawConsumer(self, parent, position=[0, 0], label='Heat Exchanger',
+                     direction='right', angleDeg=0,
+                     heat_exchangerType='consumer'):
+        """Draw a heat exchanger.
+
+        parent: parent object
+        position: position [x,y]
+
+        label: label of the object (it can be repeated)
+        angleDeg: rotation angle in degrees counter-clockwise (default 0)
+        """
+        group = self.createGroup(parent, label)
+        elem = self.createGroup(group)
+
+        self.radius = self.componentExtent / 2
+
+        # draw inner circle
+        inkDraw.circle.centerRadius(
+            elem, [self.componentExtent * (0.5 + 0.1), 0],
+            self.radius * (1 - 0.2),
+            offset=position, label='circle', lineStyle=self.lineStyle
+        )
+
+        # draw outer circle
+        inkDraw.circle.centerRadius(
+            elem, [self.componentExtent * (0.5 + 0.1), 0],
+            self.radius * (1 + 0.2),
+            offset=position, label='circle', lineStyle=self.lineStyle
+        )
+
+        # draw left connector
+        inkDraw.line.relCoords(
+            elem, [[- self.connectorLength, 0]], position,
+            lineStyle=self.lineStyle)
+
+        # draw lower connector
+        inkDraw.line.relCoords(
+            elem, [[self.connectorLength, 0]],
+            [position[0] + self.componentExtent * (1 + 2 * 0.1),
+             position[1]],
+            lineStyle=self.lineStyle)
+
+        # change direction to the users choice
+        if direction == 'right':
+            # draw diagonal
+            inkDraw.line.relCoords(
+                elem,
+                [[self.componentExtent * 0.8 * sqrt(2) / 2,
+                  self.componentExtent * 0.8 * sqrt(2) / 2]],
+                [(position[0] + self.componentExtent * 0.2
+                  + self.radius * 0.8 * (1 - cos(pi/4))),
+                 position[1] - self.radius * 0.8 * sin(pi/4)],
+                lineStyle=self.lineStyle)
+
+        elif direction == 'left':
+            # draw diagonal
+            inkDraw.line.relCoords(
+                elem,
+                [[self.componentExtent * 0.8 * sqrt(2) / 2,
+                  - self.componentExtent * 0.8 * sqrt(2) / 2]],
+                [(position[0] + self.componentExtent * 0.2
+                  + self.radius * 0.8 * (1 - cos(pi/4))),
+                 position[1] + self.radius * 0.8 * sin(pi/4)],
+                lineStyle=self.lineStyle)
+
+        # change rotation to user defined angle
+        if angleDeg != 0:
+            self.rotateElement(group, position, angleDeg)
+
+        pos_text = [position[0] + self.componentExtent * (0.5 + 0.1),
+                    position[1] - self.componentExtent * (0.5 + 0.2)
+                    - self.connectorLength]
+
+        inkDraw.text.write(
+            self, label, pos_text, group, fontSize=self.fontSize,
+            justification='center', textStyle=self.textStyle
         )
 
         return group

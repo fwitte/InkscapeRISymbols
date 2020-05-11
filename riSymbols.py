@@ -187,6 +187,14 @@ class RISymbols(pump, compressor, turbine, heat_exchanger, armature, node):
                     heat_exchangerType=so.heat_exchanger
                 )
 
+            elif so.heat_exchanger == 'consumer':
+                self.drawConsumer(
+                    root_layer, position, label=so.heat_exchangerLabel,
+                    direction=so.heat_exchangerDirection,
+                    angleDeg=so.heat_exchangerRot,
+                    heat_exchangerType=so.heat_exchanger
+                )
+
         elif so.tab == 'armatures':
             self.setDimensions(scale=so.armatureScale)
             if so.armature in ['valve', 'ball valve', 'check valve',
