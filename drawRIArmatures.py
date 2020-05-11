@@ -104,11 +104,19 @@ class armature(component):
                 lineStyle=inkDraw.lineStyle.set(fillColor='#000000')
             )
 
-            inkDraw.circle.centerRadius(
-                elem, [self.connectorLength, - self.componentExtent / 4],
-                self.scale * 0.5, offset=position, label='circle',
-                lineStyle=inkDraw.lineStyle.set(fillColor='#000000')
-            )
+            if direction == 'right':
+                inkDraw.circle.centerRadius(
+                    elem, [self.connectorLength, - self.componentExtent / 4],
+                    self.scale * 0.5, offset=position, label='circle',
+                    lineStyle=inkDraw.lineStyle.set(fillColor='#000000')
+                )
+            elif direction == 'left':
+                inkDraw.circle.centerRadius(
+                    elem, [self.connectorLength + self.componentExtent,
+                           - self.componentExtent / 4],
+                    self.scale * 0.5, offset=position, label='circle',
+                    lineStyle=inkDraw.lineStyle.set(fillColor='#000000')
+                )
 
         if armatureType == 'three way ball valve':
             inkDraw.line.relCoords(
