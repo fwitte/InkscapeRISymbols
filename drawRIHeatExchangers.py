@@ -5,7 +5,7 @@ import inkscapeMadeEasy_Draw as inkDraw
 
 from drawRIComponents import component
 
-from numpy import sqrt, sin, cos, pi
+# from numpy import sqrt, sin, cos, pi
 
 
 class heat_exchanger(component):
@@ -130,6 +130,7 @@ class heat_exchanger(component):
 
         return group
 
+    # ---------------------------------------------
     def drawGenericX(self, parent, position=[0, 0], label='Heat Exchanger',
                      direction='right', angleDeg=0,
                      heat_exchangerType='genericX'):
@@ -275,6 +276,151 @@ class heat_exchanger(component):
         pos_text = [text_x_offset,
                     (position[1] - self.componentExtent / 2
                      - self.connectorLength / 2)]
+
+        inkDraw.text.write(
+            self, label, pos_text, group, fontSize=self.fontSize,
+            justification=direction, textStyle=self.textStyle
+        )
+
+        return group
+
+    # ---------------------------------------------
+    def drawTubular(self, parent, position=[0, 0], label='Heat Exchanger',
+                    direction='right', angleDeg=0,
+                    heat_exchangerType='generic'):
+        """Draw a heat exchanger.
+
+        parent: parent object
+        position: position [x,y]
+
+        label: label of the object (it can be repeated)
+        angleDeg: rotation angle in degrees counter-clockwise (default 0)
+        """
+        group = self.createGroup(parent, label)
+        elem = self.createGroup(group)
+
+        # draw the seven vertical lines (left to right)
+        inkDraw.line.relCoords(
+            elem, [[0, self.componentExtent]],
+            [position[0] + self.componentExtent * 1 / 14 * 1.25,
+             position[1] - self.componentExtent / 2],
+            lineStyle=self.lineStyle)
+
+        inkDraw.line.relCoords(
+            elem, [[0, self.componentExtent]],
+            [position[0] + self.componentExtent * 3 / 14 * 1.25,
+             position[1] - self.componentExtent / 2],
+            lineStyle=self.lineStyle)
+
+        inkDraw.line.relCoords(
+            elem, [[0, self.componentExtent]],
+            [position[0] + self.componentExtent * 5 / 14 * 1.25,
+             position[1] - self.componentExtent / 2],
+            lineStyle=self.lineStyle)
+
+        inkDraw.line.relCoords(
+            elem, [[0, self.componentExtent]],
+            [position[0] + self.componentExtent * 7 / 14 * 1.25,
+             position[1] - self.componentExtent / 2],
+            lineStyle=self.lineStyle)
+
+        inkDraw.line.relCoords(
+            elem, [[0, self.componentExtent]],
+            [position[0] + self.componentExtent * 9 / 14 * 1.25,
+             position[1] - self.componentExtent / 2],
+            lineStyle=self.lineStyle)
+
+        inkDraw.line.relCoords(
+            elem, [[0, self.componentExtent]],
+            [position[0] + self.componentExtent * 11 / 14 * 1.25,
+             position[1] - self.componentExtent / 2],
+            lineStyle=self.lineStyle)
+
+        inkDraw.line.relCoords(
+            elem, [[0, self.componentExtent]],
+            [position[0] + self.componentExtent * 13 / 14 * 1.25,
+             position[1] - self.componentExtent / 2],
+            lineStyle=self.lineStyle)
+
+        # draw the four horizontal lines (top to bottom)
+        inkDraw.line.relCoords(
+            elem, [[self.componentExtent * 1.25, 0]],
+            [position[0],
+             position[1] - self.componentExtent * 3 / 4],
+            lineStyle=self.lineStyle)
+
+        inkDraw.line.relCoords(
+            elem, [[self.componentExtent * 1.25, 0]],
+            [position[0],
+             position[1] - self.componentExtent / 2],
+            lineStyle=self.lineStyle)
+
+        inkDraw.line.relCoords(
+            elem, [[self.componentExtent * 1.25, 0]],
+            [position[0],
+             position[1] + self.componentExtent / 2],
+            lineStyle=self.lineStyle)
+
+        inkDraw.line.relCoords(
+            elem, [[self.componentExtent * 1.25, 0]],
+            [position[0],
+             position[1] + self.componentExtent * 3 / 4],
+            lineStyle=self.lineStyle)
+
+        # draw the outer boundaries for top and bottom
+        inkDraw.line.relCoords(
+            elem, [[0, - self.componentExtent * 1 / 4]],
+            [position[0],
+             position[1] - self.componentExtent / 2],
+            lineStyle=self.lineStyle)
+
+        inkDraw.line.relCoords(
+            elem, [[0, - self.componentExtent * 1 / 4]],
+            [position[0] + self.componentExtent * 1.25,
+             position[1] - self.componentExtent / 2],
+            lineStyle=self.lineStyle)
+
+        inkDraw.line.relCoords(
+            elem, [[0, self.componentExtent * 1 / 4]],
+            [position[0],
+             position[1] + self.componentExtent / 2],
+            lineStyle=self.lineStyle)
+
+        inkDraw.line.relCoords(
+            elem, [[0, self.componentExtent * 1 / 4]],
+            [position[0] + self.componentExtent * 1.25,
+             position[1] + self.componentExtent / 2],
+            lineStyle=self.lineStyle)
+
+        # draw upper connector
+        inkDraw.line.relCoords(
+            elem, [[0, - self.connectorLength]],
+            [position[0] + self.componentExtent * 1.25 / 2,
+             position[1] - self.componentExtent * 3 / 4],
+            lineStyle=self.lineStyle)
+
+        # draw lower connector
+        inkDraw.line.relCoords(
+            elem, [[0, self.connectorLength]],
+            [position[0] + self.componentExtent * 1.25 / 2,
+             position[1] + self.componentExtent * 3 / 4],
+            lineStyle=self.lineStyle)
+
+        # change direction to the users choice
+        if direction == 'right':
+            # adjust label position
+            text_x_offset = position[0] - self.connectorLength
+
+        elif direction == 'left':
+            # adjust label position
+            text_x_offset = (position[0] + self.componentExtent * 1.25
+                             + self.connectorLength)
+
+        # change rotation to user defined angle
+        if angleDeg != 0:
+            self.rotateElement(group, position, angleDeg)
+
+        pos_text = [text_x_offset, position[1]]
 
         inkDraw.text.write(
             self, label, pos_text, group, fontSize=self.fontSize,
