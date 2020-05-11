@@ -12,6 +12,7 @@ from drawRIHeatExchangers import heat_exchanger
 from drawRIArmatures import armature
 from drawRINodes import node
 from drawRITurbines import turbine
+from drawRICombCham import combustion_chamber
 
 # some symbol definition
 
@@ -43,7 +44,7 @@ def latexUnitMultiple(valueString):
 
 
 # ---------------------------------------------
-class RISymbols(pump, compressor, turbine, heat_exchanger, armature, node):
+class RISymbols(pump, compressor, turbine, heat_exchanger, armature, combustion_chamber, node):
     def __init__(self):
         inkBase.inkscapeMadeEasy.__init__(self)
 
@@ -85,6 +86,11 @@ class RISymbols(pump, compressor, turbine, heat_exchanger, armature, node):
         self.OptionParser.add_option("--armatureRot", action="store", type="string", dest="armatureRot", default='0')
         self.OptionParser.add_option("--armatureDirection", action="store", type="string", dest="armatureDirection", default='right')
         self.OptionParser.add_option("--armatureScale", action="store", type="int", dest="armatureScale", default='1')
+
+        self.OptionParser.add_option("--combustion_chamber", action="store", type="string", dest="combustion_chamber", default='Default')
+        self.OptionParser.add_option("--comb_chamLabel", action="store", type="string", dest="comb_chamLabel", default='Combustion Chamber')
+        self.OptionParser.add_option("--comb_chamRot", action="store", type="string", dest="comb_chamRot", default='0')
+        self.OptionParser.add_option("--comb_chamScale", action="store", type="int", dest="comb_chamScale", default='1')
 
         self.OptionParser.add_option("--node", action="store", type="string", dest="node", default='Default')
         self.OptionParser.add_option("--nodeLabel", action="store", type="string", dest="nodeLabel", default='Node')
@@ -135,6 +141,7 @@ class RISymbols(pump, compressor, turbine, heat_exchanger, armature, node):
         so.heat_exchangerRot = float(so.heat_exchangerRot)
         so.pipeRot = float(so.pipeRot)
         so.armatureRot = float(so.armatureRot)
+        so.comb_chamRot = float(so.comb_chamRot)
         so.nodeRot = float(so.nodeRot)
 
         if so.tab == 'pump':
@@ -194,6 +201,15 @@ class RISymbols(pump, compressor, turbine, heat_exchanger, armature, node):
                 self.drawExpansionValve(
                     root_layer, position, label=so.armatureLabel,
                     direction=so.armatureDirection, angleDeg=so.armatureRot
+                )
+
+        elif so.tab == 'combustion_chamber':
+            self.setDimensions(scale=so.comb_chamScale)
+            self.drawCombCham(
+                root_layer, position,
+                label=so.comb_chamLabel,
+                angleDeg=so.comb_chamRot,
+                comb_chamType=so.combustion_chamber
                 )
 
         elif so.tab == 'nodes':
