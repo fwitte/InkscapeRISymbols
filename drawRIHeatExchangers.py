@@ -130,9 +130,10 @@ class heat_exchanger(component):
 
         return group
 
+    # ---------------------------------------------
     def drawGenericX(self, parent, position=[0, 0], label='Heat Exchanger',
                      direction='right', angleDeg=0,
-                     heat_exchangerType='generic'):
+                     heat_exchangerType='genericX'):
         """Draw a heat exchanger.
 
         parent: parent object
@@ -190,11 +191,39 @@ class heat_exchanger(component):
             lineStyle=self.lineStyle)
 
         # lower connector
-        inkDraw.line.relCoords(
-            elem, [[0, self.connectorLength]],
-            [position[0] + self.componentExtent / 2,
-             position[1] + self.componentExtent / 2],
-            lineStyle=self.lineStyle)
+        if heat_exchangerType == 'genericX':
+            inkDraw.line.relCoords(
+                elem, [[0, self.connectorLength]],
+                [position[0] + self.componentExtent / 2,
+                 position[1] + self.componentExtent / 2],
+                lineStyle=self.lineStyle)
+        elif heat_exchangerType == 'condenser':
+            inkDraw.line.relCoords(
+                elem, [[0, self.connectorLength]],
+                [position[0] + self.componentExtent / 2,
+                 position[1] + self.componentExtent * 3 / 4],
+                lineStyle=self.lineStyle)
+
+            # bottom line of condensate container
+            inkDraw.line.relCoords(
+                elem, [[self.componentExtent / 2, 0]],
+                [position[0] + self.componentExtent / 4,
+                 position[1] + self.componentExtent * 3 / 4],
+                lineStyle=self.lineStyle)
+
+            # left line of condensate container
+            inkDraw.line.relCoords(
+                elem, [[0, self.componentExtent / 4]],
+                [position[0] + self.componentExtent / 4,
+                 position[1] + self.componentExtent / 2],
+                lineStyle=self.lineStyle)
+
+            # right line of condensate container
+            inkDraw.line.relCoords(
+                elem, [[0, self.componentExtent / 4]],
+                [position[0] + self.componentExtent * 3 / 4,
+                 position[1] + self.componentExtent / 2],
+                lineStyle=self.lineStyle)
 
         # draw heat receiving medium
         # centered vertical line
@@ -251,6 +280,232 @@ class heat_exchanger(component):
         inkDraw.text.write(
             self, label, pos_text, group, fontSize=self.fontSize,
             justification=direction, textStyle=self.textStyle
+        )
+
+        return group
+
+    # ---------------------------------------------
+    def drawTubular(self, parent, position=[0, 0], label='Heat Exchanger',
+                    direction='right', angleDeg=0,
+                    heat_exchangerType='generic'):
+        """Draw a heat exchanger.
+
+        parent: parent object
+        position: position [x,y]
+
+        label: label of the object (it can be repeated)
+        angleDeg: rotation angle in degrees counter-clockwise (default 0)
+        """
+        group = self.createGroup(parent, label)
+        elem = self.createGroup(group)
+
+        # draw the seven vertical lines (left to right)
+        inkDraw.line.relCoords(
+            elem, [[0, self.componentExtent]],
+            [position[0] + self.componentExtent * 1 / 14 * 1.25,
+             position[1] - self.componentExtent / 2],
+            lineStyle=self.lineStyle)
+
+        inkDraw.line.relCoords(
+            elem, [[0, self.componentExtent]],
+            [position[0] + self.componentExtent * 3 / 14 * 1.25,
+             position[1] - self.componentExtent / 2],
+            lineStyle=self.lineStyle)
+
+        inkDraw.line.relCoords(
+            elem, [[0, self.componentExtent]],
+            [position[0] + self.componentExtent * 5 / 14 * 1.25,
+             position[1] - self.componentExtent / 2],
+            lineStyle=self.lineStyle)
+
+        inkDraw.line.relCoords(
+            elem, [[0, self.componentExtent]],
+            [position[0] + self.componentExtent * 7 / 14 * 1.25,
+             position[1] - self.componentExtent / 2],
+            lineStyle=self.lineStyle)
+
+        inkDraw.line.relCoords(
+            elem, [[0, self.componentExtent]],
+            [position[0] + self.componentExtent * 9 / 14 * 1.25,
+             position[1] - self.componentExtent / 2],
+            lineStyle=self.lineStyle)
+
+        inkDraw.line.relCoords(
+            elem, [[0, self.componentExtent]],
+            [position[0] + self.componentExtent * 11 / 14 * 1.25,
+             position[1] - self.componentExtent / 2],
+            lineStyle=self.lineStyle)
+
+        inkDraw.line.relCoords(
+            elem, [[0, self.componentExtent]],
+            [position[0] + self.componentExtent * 13 / 14 * 1.25,
+             position[1] - self.componentExtent / 2],
+            lineStyle=self.lineStyle)
+
+        # draw the four horizontal lines (top to bottom)
+        inkDraw.line.relCoords(
+            elem, [[self.componentExtent * 1.25, 0]],
+            [position[0],
+             position[1] - self.componentExtent * 3 / 4],
+            lineStyle=self.lineStyle)
+
+        inkDraw.line.relCoords(
+            elem, [[self.componentExtent * 1.25, 0]],
+            [position[0],
+             position[1] - self.componentExtent / 2],
+            lineStyle=self.lineStyle)
+
+        inkDraw.line.relCoords(
+            elem, [[self.componentExtent * 1.25, 0]],
+            [position[0],
+             position[1] + self.componentExtent / 2],
+            lineStyle=self.lineStyle)
+
+        inkDraw.line.relCoords(
+            elem, [[self.componentExtent * 1.25, 0]],
+            [position[0],
+             position[1] + self.componentExtent * 3 / 4],
+            lineStyle=self.lineStyle)
+
+        # draw the outer boundaries for top and bottom
+        inkDraw.line.relCoords(
+            elem, [[0, - self.componentExtent * 1 / 4]],
+            [position[0],
+             position[1] - self.componentExtent / 2],
+            lineStyle=self.lineStyle)
+
+        inkDraw.line.relCoords(
+            elem, [[0, - self.componentExtent * 1 / 4]],
+            [position[0] + self.componentExtent * 1.25,
+             position[1] - self.componentExtent / 2],
+            lineStyle=self.lineStyle)
+
+        inkDraw.line.relCoords(
+            elem, [[0, self.componentExtent * 1 / 4]],
+            [position[0],
+             position[1] + self.componentExtent / 2],
+            lineStyle=self.lineStyle)
+
+        inkDraw.line.relCoords(
+            elem, [[0, self.componentExtent * 1 / 4]],
+            [position[0] + self.componentExtent * 1.25,
+             position[1] + self.componentExtent / 2],
+            lineStyle=self.lineStyle)
+
+        # draw upper connector
+        inkDraw.line.relCoords(
+            elem, [[0, - self.connectorLength]],
+            [position[0] + self.componentExtent * 1.25 / 2,
+             position[1] - self.componentExtent * 3 / 4],
+            lineStyle=self.lineStyle)
+
+        # draw lower connector
+        inkDraw.line.relCoords(
+            elem, [[0, self.connectorLength]],
+            [position[0] + self.componentExtent * 1.25 / 2,
+             position[1] + self.componentExtent * 3 / 4],
+            lineStyle=self.lineStyle)
+
+        # change direction to the users choice
+        if direction == 'right':
+            # adjust label position
+            text_x_offset = position[0] - self.connectorLength
+
+        elif direction == 'left':
+            # adjust label position
+            text_x_offset = (position[0] + self.componentExtent * 1.25
+                             + self.connectorLength)
+
+        # change rotation to user defined angle
+        if angleDeg != 0:
+            self.rotateElement(group, position, angleDeg)
+
+        pos_text = [text_x_offset, position[1]]
+
+        inkDraw.text.write(
+            self, label, pos_text, group, fontSize=self.fontSize,
+            justification=direction, textStyle=self.textStyle
+        )
+
+        return group
+
+    # ---------------------------------------------
+    def drawConsumer(self, parent, position=[0, 0], label='Heat Exchanger',
+                     direction='right', angleDeg=0,
+                     heat_exchangerType='consumer'):
+        """Draw a heat exchanger.
+
+        parent: parent object
+        position: position [x,y]
+
+        label: label of the object (it can be repeated)
+        angleDeg: rotation angle in degrees counter-clockwise (default 0)
+        """
+        group = self.createGroup(parent, label)
+        elem = self.createGroup(group)
+
+        self.radius = self.componentExtent / 2
+
+        # draw inner circle
+        inkDraw.circle.centerRadius(
+            elem, [self.componentExtent * (0.5 + 0.1), 0],
+            self.radius * (1 - 0.2),
+            offset=position, label='circle', lineStyle=self.lineStyle
+        )
+
+        # draw outer circle
+        inkDraw.circle.centerRadius(
+            elem, [self.componentExtent * (0.5 + 0.1), 0],
+            self.radius * (1 + 0.2),
+            offset=position, label='circle', lineStyle=self.lineStyle
+        )
+
+        # draw left connector
+        inkDraw.line.relCoords(
+            elem, [[- self.connectorLength, 0]], position,
+            lineStyle=self.lineStyle)
+
+        # draw lower connector
+        inkDraw.line.relCoords(
+            elem, [[self.connectorLength, 0]],
+            [position[0] + self.componentExtent * (1 + 2 * 0.1),
+             position[1]],
+            lineStyle=self.lineStyle)
+
+        # change direction to the users choice
+        if direction == 'right':
+            # draw diagonal
+            inkDraw.line.relCoords(
+                elem,
+                [[self.componentExtent * 0.8 * sqrt(2) / 2,
+                  self.componentExtent * 0.8 * sqrt(2) / 2]],
+                [(position[0] + self.componentExtent * 0.2
+                  + self.radius * 0.8 * (1 - cos(pi/4))),
+                 position[1] - self.radius * 0.8 * sin(pi/4)],
+                lineStyle=self.lineStyle)
+
+        elif direction == 'left':
+            # draw diagonal
+            inkDraw.line.relCoords(
+                elem,
+                [[self.componentExtent * 0.8 * sqrt(2) / 2,
+                  - self.componentExtent * 0.8 * sqrt(2) / 2]],
+                [(position[0] + self.componentExtent * 0.2
+                  + self.radius * 0.8 * (1 - cos(pi/4))),
+                 position[1] + self.radius * 0.8 * sin(pi/4)],
+                lineStyle=self.lineStyle)
+
+        # change rotation to user defined angle
+        if angleDeg != 0:
+            self.rotateElement(group, position, angleDeg)
+
+        pos_text = [position[0] + self.componentExtent * (0.5 + 0.1),
+                    position[1] - self.componentExtent * (0.5 + 0.2)
+                    - self.connectorLength]
+
+        inkDraw.text.write(
+            self, label, pos_text, group, fontSize=self.fontSize,
+            justification='center', textStyle=self.textStyle
         )
 
         return group
