@@ -209,6 +209,14 @@ class RISymbols(pump, compressor, turbine, elec_maschine, heat_exchanger, armatu
                     heat_exchangerType=so.heat_exchanger
                 )
 
+            elif so.heat_exchanger == 'plate':
+                self.drawPlate(
+                    root_layer, position, label=so.heat_exchangerLabel,
+                    direction=so.heat_exchangerDirection,
+                    angleDeg=so.heat_exchangerRot,
+                    heat_exchangerType=so.heat_exchanger
+                )
+
             elif so.heat_exchanger == 'tube':
                 self.drawTubular(
                     root_layer, position, label=so.heat_exchangerLabel,

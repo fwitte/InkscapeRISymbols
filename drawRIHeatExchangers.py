@@ -418,6 +418,104 @@ class heat_exchanger(component):
         return group
 
     # ---------------------------------------------
+    def drawPlate(self, parent, position=[0, 0], label='Heat Exchanger',
+                  direction='right', angleDeg=0,
+                  heat_exchangerType='plate'):
+        """Draw a plate heat exchanger.
+
+        parent: parent object
+        position: position [x,y]
+
+        label: label of the object (it can be repeated)
+        angleDeg: rotation angle in degrees counter-clockwise (default 0)
+        """
+        group = self.createGroup(parent, label)
+        elem = self.createGroup(group)
+
+        # draw main square
+        # left vertical line
+        inkDraw.line.relCoords(
+            elem, [[0, -2 * self.componentExtent]],
+            [position[0], position[1] + self.componentExtent],
+            lineStyle=self.lineStyle)
+
+        # right vertical line
+        inkDraw.line.relCoords(
+            elem, [[0, -2 * self.componentExtent]],
+            [position[0] + self.componentExtent,
+             position[1] + self.componentExtent],
+            lineStyle=self.lineStyle)
+
+        # upper horizontal line
+        inkDraw.line.relCoords(
+            elem, [[self.componentExtent, 0]],
+            [position[0], position[1] - self.componentExtent],
+            lineStyle=self.lineStyle)
+
+        # lower horizontal line
+        inkDraw.line.relCoords(
+            elem, [[self.componentExtent, 0]],
+            [position[0], position[1] + self.componentExtent],
+            lineStyle=self.lineStyle)
+
+        # upper connectors
+        inkDraw.line.relCoords(
+            elem, [[- self.connectorLength, 0]],
+            [position[0],
+             position[1] - self.componentExtent * 3 / 4],
+            lineStyle=self.lineStyle)
+
+        inkDraw.line.relCoords(
+            elem, [[self.connectorLength, 0]],
+            [position[0] + self.componentExtent,
+             position[1] - self.componentExtent * 3 / 4],
+            lineStyle=self.lineStyle)
+
+        # lower connectors
+        inkDraw.line.relCoords(
+            elem, [[- self.connectorLength, 0]],
+            [position[0],
+             position[1] + self.componentExtent * 3 / 4],
+            lineStyle=self.lineStyle)
+
+        inkDraw.line.relCoords(
+            elem, [[self.connectorLength, 0]],
+            [position[0] + self.componentExtent,
+             position[1] + self.componentExtent * 3 / 4],
+            lineStyle=self.lineStyle)
+
+        # change direction to the users choice
+        if direction == 'right':
+            # draw descending diagonal line
+            inkDraw.line.relCoords(
+                elem, [[self.componentExtent,
+                        self.componentExtent * 2]],
+                [position[0], position[1] - self.componentExtent],
+                lineStyle=self.lineStyle)
+
+        elif direction == 'left':
+            # draw ascending diagonal line
+            inkDraw.line.relCoords(
+                elem, [[self.componentExtent,
+                        - self.componentExtent * 2]],
+                [position[0], position[1] + self.componentExtent],
+                lineStyle=self.lineStyle)
+
+        # change rotation to user defined angle
+        if angleDeg != 0:
+            self.rotateElement(group, position, angleDeg)
+
+        pos_text = [position[0] + self.componentExtent / 2,
+                    position[1] - self.componentExtent - self.connectorLength]
+
+        inkDraw.text.write(
+            self, label, pos_text, group, fontSize=self.fontSize,
+            justification='center', textStyle=self.textStyle
+        )
+
+        return group
+
+    # ---------------------------------------------
     def drawTubular(self, parent, position=[0, 0], label='Heat Exchanger',
                     direction='right', angleDeg=0,
                     heat_exchangerType='generic'):
