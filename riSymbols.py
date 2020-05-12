@@ -96,6 +96,7 @@ class RISymbols(pump, compressor, turbine, elec_maschine, heat_exchanger, armatu
         self.OptionParser.add_option("--combustion_chamber", action="store", type="string", dest="combustion_chamber", default='Default')
         self.OptionParser.add_option("--comb_chamLabel", action="store", type="string", dest="comb_chamLabel", default='Combustion Chamber')
         self.OptionParser.add_option("--comb_chamRot", action="store", type="string", dest="comb_chamRot", default='0')
+        self.OptionParser.add_option("--comb_chamDirection", action="store", type="string", dest="comb_chamDirection", default='Top')
         self.OptionParser.add_option("--comb_chamScale", action="store", type="int", dest="comb_chamScale", default='1')
 
         self.OptionParser.add_option("--node", action="store", type="string", dest="node", default='Default')
@@ -239,6 +240,7 @@ class RISymbols(pump, compressor, turbine, elec_maschine, heat_exchanger, armatu
                 root_layer, position,
                 label=so.comb_chamLabel,
                 angleDeg=so.comb_chamRot,
+                direction=so.comb_chamDirection,
                 comb_chamType=so.combustion_chamber
                 )
 

@@ -10,7 +10,7 @@ from numpy import sqrt, sin, cos, pi
 class combustion_chamber(component):
     # ---------------------------------------------
     def drawCombCham(self, parent, position=[0, 0], label='comb_cham',
-                    angleDeg=0, comb_chamType='comb_cham'):
+                     angleDeg=0, direction='top', comb_chamType='comb_cham'):
         """Draw a combustion chamber.
 
         parent: parent object
@@ -93,11 +93,20 @@ class combustion_chamber(component):
             lineStyle=self.lineStyle
             )
 
-        # connector up
-        inkDraw.line.relCoords(
-            elem, [[0, - self.connectorLength]],
-            [position[0] + self.radius, position[1] - self.radius],
-            lineStyle=self.lineStyle
+        if direction == 'top':
+            # connector up
+            inkDraw.line.relCoords(
+                elem, [[0, - self.connectorLength]],
+                [position[0] + self.radius, position[1] - self.radius],
+                lineStyle=self.lineStyle
+            )
+
+        elif direction == 'down':
+            # connector up
+            inkDraw.line.relCoords(
+                elem, [[0, + self.connectorLength]],
+                [position[0] + self.radius, position[1] + self.radius],
+                lineStyle=self.lineStyle
             )
 
         # Roating components
