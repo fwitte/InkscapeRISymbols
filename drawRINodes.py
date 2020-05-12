@@ -90,7 +90,7 @@ class node(component):
                 # left side
                 inkDraw.line.relCoords(
                     elem, [[0, self.connectorLength]],
-                    [position[0] + self.connectorLength * 1.5,
+                    [position[0] + self.connectorLength / 2,
                     position[1] - self.connectorLength / 2],
                     lineStyle=self.lineStyle
                 )
@@ -98,21 +98,21 @@ class node(component):
                 # diagonally top right
                 inkDraw.line.relCoords(
                     elem, [[self.connectorLength / 2, - self.connectorLength / 2]],
-                    [position[0] + self.connectorLength, position[1]],
+                    [position[0], position[1]],
                     lineStyle=self.lineStyle
                 )
 
                 # diagonally down left
                 inkDraw.line.relCoords(
                     elem, [[self.connectorLength / 2, self.connectorLength / 2]],
-                    [position[0] + self.connectorLength, position[1]],
+                    [position[0], position[1]],
                     lineStyle=self.lineStyle
                 )
 
                 # connector
                 inkDraw.line.relCoords(
                     elem, [[self.connectorLength, 0]],
-                    [position[0] + self.connectorLength * 1.5, position[1]],
+                    [position[0] + self.connectorLength / 2, position[1]],
                     lineStyle=self.lineStyle
                 )
 
@@ -147,64 +147,63 @@ class node(component):
 
         elif nodeType == 'cyclecloser':
             if direction == 'right':
-                # construction like a source
                 # left side
                 inkDraw.line.relCoords(
-                    elem, [[0, self.componentExtent]],
-                    [position[0],position[1] - self.componentExtent / 2],
+                    elem, [[0, self.connectorLength]],
+                    [position[0],position[1] - self.connectorLength / 2],
                     lineStyle=self.lineStyle
                 )
 
                 # diagonally top right
                 inkDraw.line.relCoords(
-                    elem, [[self.componentExtent, - self.componentExtent / 2]],
-                    [position[0], position[1] + self.componentExtent / 2],
+                    elem, [[self.connectorLength / 2, - self.connectorLength / 2]],
+                    [position[0], position[1] + self.connectorLength / 2],
                     lineStyle=self.lineStyle
                 )
 
                 # diagonally down left
                 inkDraw.line.relCoords(
-                    elem, [[self.componentExtent, self.componentExtent / 2]],
-                    [position[0], position[1] - self.componentExtent / 2],
+                    elem, [[self.connectorLength / 2, self.connectorLength / 2]],
+                    [position[0], position[1] - self.connectorLength / 2],
                     lineStyle=self.lineStyle
                 )
 
                 # connector right
                 inkDraw.line.relCoords(
                     elem, [[self.connectorLength, 0]],
-                    [position[0] + self.componentExtent, position[1]],
+                    [position[0] + self.connectorLength / 2, position[1]],
                     lineStyle=self.lineStyle
                     )
 
                 # feature cc
                 # left side
                 inkDraw.line.relCoords(
-                    elem, [[0, self.componentExtent]],
-                    [position[0] - self.componentExtent,
-                    position[1] - self.componentExtent / 2],
+                    elem, [[0, self.connectorLength]],
+                    [position[0] - self.connectorLength / 2,
+                    position[1] - self.connectorLength / 2],
                     lineStyle=self.lineStyle
                 )
 
                 # diagonally top right
                 inkDraw.line.relCoords(
-                    elem, [[self.componentExtent, - self.componentExtent / 2]],
-                    [position[0] - self.componentExtent,
-                    position[1] + self.componentExtent / 2],
+                    elem, [[self.connectorLength / 2, - self.connectorLength / 2]],
+                    [position[0] - self.connectorLength / 2,
+                    position[1] + self.connectorLength / 2],
                     lineStyle=self.lineStyle
                 )
 
                 # diagonally down left
                 inkDraw.line.relCoords(
-                    elem, [[self.componentExtent, self.componentExtent / 2]],
-                    [position[0] - self.componentExtent,
-                     position[1] - self.componentExtent / 2],
+                    elem, [[self.connectorLength / 2, self.connectorLength / 2]],
+                    [position[0] - self.connectorLength / 2,
+                     position[1] - self.connectorLength / 2],
                     lineStyle=self.lineStyle
                 )
 
                 # connector right
                 inkDraw.line.relCoords(
                     elem, [[- self.connectorLength, 0]],
-                    [position[0] - self.componentExtent, position[1]],
+                    [position[0] - self.connectorLength / 2, position[1]],
                     lineStyle=self.lineStyle
                 )
 
@@ -212,61 +211,64 @@ class node(component):
                 # construction like a source
                 # right side
                 inkDraw.line.relCoords(
-                    elem, [[0, -self.componentExtent]],
-                    [position[0],position[1] + self.componentExtent / 2],
+                    elem, [[0, self.connectorLength]],
+                    [position[0] + self.connectorLength,
+                    position[1] - self.connectorLength / 2],
                     lineStyle=self.lineStyle
                 )
 
                 # diagonally top right
                 inkDraw.line.relCoords(
-                    elem, [[- self.componentExtent, + self.componentExtent / 2]],
-                    [position[0], position[1] - self.componentExtent / 2],
+                    elem, [[- self.connectorLength / 2, self.connectorLength / 2]],
+                    [position[0] + self.connectorLength,
+                    position[1] - self.connectorLength / 2],
                     lineStyle=self.lineStyle
                 )
 
                 # diagonally down left
                 inkDraw.line.relCoords(
-                    elem, [[- self.componentExtent, - self.componentExtent / 2]],
-                    [position[0], position[1] + self.componentExtent / 2],
+                    elem, [[- self.connectorLength / 2, - self.connectorLength / 2]],
+                    [position[0] + self.connectorLength,
+                    position[1] + self.connectorLength / 2],
+                    lineStyle=self.lineStyle
+                )
+
+                # connector
+                inkDraw.line.relCoords(
+                    elem, [[self.connectorLength, 0]],
+                    [position[0] + self.connectorLength, position[1]],
+                    lineStyle=self.lineStyle
+                    )
+
+                # feature cc
+                # right side
+                inkDraw.line.relCoords(
+                    elem, [[0, - self.connectorLength]],
+                    [position[0] + self.connectorLength / 2,
+                    position[1] + self.connectorLength / 2],
+                    lineStyle=self.lineStyle
+                )
+
+                # diagonally top right
+                inkDraw.line.relCoords(
+                    elem, [[- self.connectorLength / 2, + self.connectorLength / 2]],
+                    [position[0] + self.connectorLength / 2,
+                    position[1] - self.connectorLength / 2],
+                    lineStyle=self.lineStyle
+                )
+
+                # diagonally down left
+                inkDraw.line.relCoords(
+                    elem, [[- self.connectorLength / 2, - self.connectorLength / 2]],
+                    [position[0] + self.connectorLength / 2,
+                     position[1] + self.connectorLength / 2],
                     lineStyle=self.lineStyle
                 )
 
                 # connector right
                 inkDraw.line.relCoords(
                     elem, [[- self.connectorLength, 0]],
-                    [position[0] - self.componentExtent, position[1]],
-                    lineStyle=self.lineStyle
-                    )
-
-                # feature cc
-                # left side
-                inkDraw.line.relCoords(
-                    elem, [[0, - self.componentExtent]],
-                    [position[0] + self.componentExtent,
-                    position[1] + self.componentExtent / 2],
-                    lineStyle=self.lineStyle
-                )
-
-                # diagonally top right
-                inkDraw.line.relCoords(
-                    elem, [[- self.componentExtent, + self.componentExtent / 2]],
-                    [position[0] + self.componentExtent,
-                    position[1] - self.componentExtent / 2],
-                    lineStyle=self.lineStyle
-                )
-
-                # diagonally down left
-                inkDraw.line.relCoords(
-                    elem, [[- self.componentExtent, - self.componentExtent / 2]],
-                    [position[0] + self.componentExtent,
-                     position[1] + self.componentExtent / 2],
-                    lineStyle=self.lineStyle
-                )
-
-                # connector right
-                inkDraw.line.relCoords(
-                    elem, [[+ self.connectorLength, 0]],
-                    [position[0] + self.componentExtent, position[1]],
+                    [position[0], position[1]],
                     lineStyle=self.lineStyle
                 )
         # Roating components
@@ -275,7 +277,7 @@ class node(component):
 
         # Labeling
         pos_text = [
-            position[0] + self.connectorLength,
+            position[0],
             position[1] - self.componentExtent / (4 * self.scale) -
             self.textOffset * self.scale]
 
