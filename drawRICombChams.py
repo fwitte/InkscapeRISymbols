@@ -27,7 +27,7 @@ class combustion_chamber(component):
 
         # draw main circle
         inkDraw.circle.centerRadius(
-            elem, [self.radius, 0], self.radius,
+            elem, [self.radius, 0], self.radius * 0.8,
             offset=position, label='circle', lineStyle=self.lineStyle
         )
 
@@ -35,7 +35,7 @@ class combustion_chamber(component):
         inkDraw.line.relCoords(
             elem, [[0, self.componentExtent]],
             [position[0],
-            position[1] - self.componentExtent / 2],
+             position[1] - self.componentExtent / 2],
             lineStyle=self.lineStyle
         )
 
@@ -43,7 +43,7 @@ class combustion_chamber(component):
         inkDraw.line.relCoords(
             elem, [[self.componentExtent, 0]],
             [position[0],
-            position[1] - self.componentExtent / 2],
+             position[1] - self.componentExtent / 2],
             lineStyle=self.lineStyle
         )
 
@@ -51,7 +51,7 @@ class combustion_chamber(component):
         inkDraw.line.relCoords(
             elem, [[self.componentExtent, 0]],
             [position[0],
-            position[1] + self.componentExtent / 2],
+             position[1] + self.componentExtent / 2],
             lineStyle=self.lineStyle
         )
 
@@ -59,23 +59,25 @@ class combustion_chamber(component):
         inkDraw.line.relCoords(
             elem, [[0, self.componentExtent]],
             [position[0] + self.componentExtent,
-            position[1] - self.componentExtent / 2],
+             position[1] - self.componentExtent / 2],
             lineStyle=self.lineStyle
         )
 
         # diagonally top right
         inkDraw.line.relCoords(
-            elem, [[self.radius * 2 / sqrt(2), - self.radius * 2 / sqrt(2)]],
-            [position[0] + self.radius * (1 - cos(pi/4)),
-             position[1] + self.radius *  sin(pi/4)],
+            elem, [[self.radius * 0.8 * 2 / sqrt(2),
+                    - self.radius * 0.8 * 2 / sqrt(2)]],
+            [position[0] + self.radius * (0.8 * (1 - cos(pi/4)) + 0.2),
+             position[1] + self.radius * 0.8 * sin(pi/4)],
             lineStyle=self.lineStyle
         )
 
         # diagonally down left
         inkDraw.line.relCoords(
-            elem, [[self.radius * 2 / sqrt(2), + self.radius * 2 / sqrt(2)]],
-            [position[0] + self.radius * (1 - cos(pi/4)),
-             position[1] - self.radius * sin(pi/4)],
+            elem, [[self.radius * 0.8 * 2 / sqrt(2),
+                    self.radius * 0.8 * 2 / sqrt(2)]],
+            [position[0] + self.radius * (0.8 * (1 - cos(pi/4)) + 0.2),
+             position[1] - self.radius * 0.8 * sin(pi/4)],
             lineStyle=self.lineStyle
         )
 
