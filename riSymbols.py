@@ -193,8 +193,16 @@ class RISymbols(pump, compressor, turbine, elec_maschine, heat_exchanger, armatu
                     heat_exchangerType=so.heat_exchanger
                 )
 
-            elif so.heat_exchanger in ['genericX', 'condenser']:
+            elif so.heat_exchanger == 'genericX':
                 self.drawGenericX(
+                    root_layer, position, label=so.heat_exchangerLabel,
+                    direction=so.heat_exchangerDirection,
+                    angleDeg=so.heat_exchangerRot,
+                    heat_exchangerType=so.heat_exchanger
+                )
+
+            elif so.heat_exchanger == 'condenser':
+                self.drawCondenser(
                     root_layer, position, label=so.heat_exchangerLabel,
                     direction=so.heat_exchangerDirection,
                     angleDeg=so.heat_exchangerRot,
